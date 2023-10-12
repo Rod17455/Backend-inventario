@@ -15,13 +15,15 @@ public class InventarioContext : DbContext
     {
     }
 
-    public virtual DbSet<CteProv> CteProvs { get; set; }
+    public  DbSet<CteProv> CteProvs { get; set; }
 
-    public virtual DbSet<Producto> Productos { get; set; }
+    public  DbSet<Producto> Productos { get; set; }
 
-    public virtual DbSet<Reporte> Reportes { get; set; }
+    public  DbSet<Reporte> Reportes { get; set; }
 
-    public virtual DbSet<Usuario> Usuarios { get; set; }
+    public  DbSet<Usuario> Usuarios { get; set; }
+
+    public  DbSet<Rol> Roles { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

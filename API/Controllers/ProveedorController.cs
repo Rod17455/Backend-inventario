@@ -1,10 +1,13 @@
 ﻿using API.Dtos;
+using API.Helpers;
+using API.Helpers.Errors;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Infrastructure.UnitOfWork;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +16,7 @@ namespace API.Controllers;
 
 [ApiVersion("1.0")]
 [ApiVersion("1.1")]
-[Route("api/[controller]")]
-[ApiController]
+[Authorize]
 public class ProveedorController : BaseApiController
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -25,14 +27,22 @@ public class ProveedorController : BaseApiController
         _mapper = mapper;
     }
 
-    [HttpGet]
+    //[HttpPost("register")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<CteProvDto>>> GetProveedor()
+    public async Task<ActionResult<Pager<CteProvDto>>> GetProveedor([FromQuery] Params cteProvParams)
     {
-        var cteProv = await _unitOfWork.CteProvs.GetAllAsync();
+        
+        var resultado = await _unitOfWork.CteProvs.
+            GetAllAsync(cteProvParams.PageIndex, 
+                        cteProvParams.PageSize, cteProvParams.Search ?? "");
 
-        return _mapper.Map<List<CteProvDto>>(cteProv);
+        var listaCteProv = _mapper.Map<List<CteProvDto>>(resultado.registros);
+
+        Response.Headers.Add("X-InlineCount", resultado.totalRegistros.ToString());
+
+        return new Pager<CteProvDto>(listaCteProv, resultado.totalRegistros,
+            cteProvParams.PageIndex, cteProvParams.PageSize, cteProvParams.Search);
     }
 
     [HttpGet("{id}")]
@@ -42,7 +52,7 @@ public class ProveedorController : BaseApiController
     {
         var cteprov = await _unitOfWork.CteProvs.GetByIdAsync(id);
         if(cteprov == null)
-            return NotFound();
+            return NotFound(new ApiResponse(404, "El proveedor solicitado no existe"));
 
         return _mapper.Map<CteProvDto>(cteprov);
     }
@@ -57,21 +67,25 @@ public class ProveedorController : BaseApiController
         await _unitOfWork.SaveAsync();
         if(cteProv == null)
         {
-            return BadRequest();
+            return BadRequest(new ApiResponse(400));
         }
 
         cteProvDto.ID = cteProv.ID;
         return CreatedAtAction(nameof(Post), new { id = cteProv.ID }, cteProv);
     }
     
-    [HttpPut("{id}")]
+    [HttpPut("edit/{id}")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<CteProvDto>> Put(int id, [FromBody]CteProvDto cteProvDto)
     {
         if (cteProvDto == null)
-            return NotFound();
+            return NotFound(new ApiResponse(404, "El proveedor solicitado no existe"));
+
+        var cteprovBd = await _unitOfWork.CteProvs.GetByIdAsync(id);
+        if (cteprovBd == null)
+            return NotFound(new ApiResponse(404, "El proveedor solicitado no existe"));
 
         var cteProv = _mapper.Map<CteProv>(cteProvDto);
         _unitOfWork.CteProvs.Update(cteProv);
@@ -80,14 +94,14 @@ public class ProveedorController : BaseApiController
     }
 
     
-    [HttpPut("{id}")]
+    [HttpPut("delete/{id}")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
     {
         var cteProv = await _unitOfWork.CteProvs.GetByIdAsync(id);
         if (cteProv == null)
-            return NotFound();
+            return NotFound(new ApiResponse(404, "El proveedor solicitado no existe"));
 
         _unitOfWork.CteProvs.Remove(cteProv);
         await _unitOfWork.SaveAsync();

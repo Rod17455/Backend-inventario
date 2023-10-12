@@ -1,6 +1,7 @@
 ﻿using Core.Entities;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,21 @@ public class UsuarioRepository : GenericRepository<Usuario>, IUsuarioRepository
 {
     public UsuarioRepository(InventarioContext context) : base(context)
     {
+    }
+
+    public async Task<Usuario> GetByRefreshAsync(string refreshToken)
+    {
+        return await _context.Usuarios
+                        .Include(u => u.Roles)
+                        .Include(u => u.RefreshTokens)
+                        .FirstOrDefaultAsync(u => u.RefreshTokens.Any(t=>t.Token==refreshToken));
+    }
+
+    public async Task<Usuario> GetByUserNameAsync(string userName)
+    {
+        return await _context.Usuarios
+                             .Include(u => u.Roles)
+                             .Include(u => u.RefreshTokens)
+                             .FirstOrDefaultAsync(u => u.NomUser.ToLower() == userName.ToLower());
     }
 }

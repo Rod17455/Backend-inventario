@@ -17,5 +17,9 @@ public class Usuario : BaseEntity
 
     public string Password { get; set; } = null!;
 
-    public string Rol { get; set; } = null!;
+    public ICollection<Rol> Roles { get; set; } = new HashSet<Rol>();
+    public ICollection<RefreshToken> RefreshTokens { get; set; } = new HashSet<RefreshToken>();
+    public ICollection<UsuarioRoles> UsuarioRoles { get; set; }
+
+    //public string Rol { get; set; } = null!;
 }

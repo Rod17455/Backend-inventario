@@ -1,0 +1,96 @@
+[2023-10-08 13:32:18.655 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-08 13:32:41.323 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-08 13:32:42.533 -06:00 INF] Executed DbCommand (102ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-10-08 13:32:42.664 -06:00 INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-10-08 13:32:43.142 -06:00 INF] Executed DbCommand (320ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+[2023-10-08 13:32:43.205 -06:00 INF] No migrations were applied. The database is already up to date.
+[2023-10-08 13:32:43.566 -06:00 INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Rol` AS `r`)
+[2023-10-08 13:32:43.822 -06:00 INF] User profile is available. Using 'C:\Users\Rodrigo Tellez\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2023-10-08 13:32:44.100 -06:00 INF] Now listening on: https://localhost:5001
+[2023-10-08 13:32:44.100 -06:00 INF] Now listening on: http://localhost:5000
+[2023-10-08 13:32:44.105 -06:00 INF] Application started. Press Ctrl+C to shut down.
+[2023-10-08 13:32:44.106 -06:00 INF] Hosting environment: Development
+[2023-10-08 13:32:44.106 -06:00 INF] Content root path: D:\10CUATRIMESTRE\HECTOR\Backend\inventario\API\
+[2023-10-08 13:32:53.365 -06:00 INF] Request starting HTTP/1.1 POST https://localhost:5001/api/usuario/token application/json 58
+[2023-10-08 13:32:55.428 -06:00 INF] Bearer was not authenticated. Failure message: No SecurityTokenValidator available for token.
+[2023-10-08 13:32:55.435 -06:00 INF] Executing endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-10-08 13:32:55.474 -06:00 INF] Route matched with {action = "GetToken", controller = "Usuario"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTokenAsync(API.Dtos.LoginDto) on controller API.Controllers.UsuarioController (API).
+[2023-10-08 13:32:55.554 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-08 13:32:55.860 -06:00 WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+[2023-10-08 13:32:55.969 -06:00 INF] Executed DbCommand (44ms) [Parameters=[@__ToLower_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`ID`, `t`.`Apellido`, `t`.`CorreoElectronico`, `t`.`Nom_user`, `t`.`Password`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`, `t0`.`Nombre`, `r0`.`ID`, `r0`.`Created`, `r0`.`Expires`, `r0`.`Revoked`, `r0`.`Token`, `r0`.`UsuarioId`
+FROM (
+    SELECT `u`.`ID`, `u`.`Apellido`, `u`.`CorreoElectronico`, `u`.`Nom_user`, `u`.`Password`
+    FROM `Usuario` AS `u`
+    WHERE LOWER(`u`.`Nom_user`) = @__ToLower_0
+    LIMIT 1
+) AS `t`
+LEFT JOIN (
+    SELECT `u0`.`UsuarioId`, `u0`.`RolId`, `r`.`ID`, `r`.`Nombre`
+    FROM `UsuarioRoles` AS `u0`
+    INNER JOIN `Rol` AS `r` ON `u0`.`RolId` = `r`.`ID`
+) AS `t0` ON `t`.`ID` = `t0`.`UsuarioId`
+LEFT JOIN `RefreshToken` AS `r0` ON `t`.`ID` = `r0`.`UsuarioId`
+ORDER BY `t`.`ID`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`
+[2023-10-08 13:32:56.108 -06:00 INF] Executing NotFoundObjectResult, writing value of type 'API.Helpers.Errors.ApiResponse'.
+[2023-10-08 13:32:56.131 -06:00 INF] Executed action API.Controllers.UsuarioController.GetTokenAsync (API) in 650.9433ms
+[2023-10-08 13:32:56.131 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-10-08 13:32:56.137 -06:00 INF] Request finished HTTP/1.1 POST https://localhost:5001/api/usuario/token application/json 58 - 404 - application/json;+charset=utf-8 2777.9213ms
+[2023-10-08 13:33:22.101 -06:00 INF] Request starting HTTP/1.1 POST https://localhost:5001/api/usuario/token application/json 58
+[2023-10-08 13:33:22.105 -06:00 INF] Bearer was not authenticated. Failure message: No SecurityTokenValidator available for token.
+[2023-10-08 13:33:22.105 -06:00 INF] Executing endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-10-08 13:33:22.106 -06:00 INF] Route matched with {action = "GetToken", controller = "Usuario"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTokenAsync(API.Dtos.LoginDto) on controller API.Controllers.UsuarioController (API).
+[2023-10-08 13:33:22.163 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-08 13:33:22.172 -06:00 INF] Executed DbCommand (3ms) [Parameters=[@__ToLower_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`ID`, `t`.`Apellido`, `t`.`CorreoElectronico`, `t`.`Nom_user`, `t`.`Password`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`, `t0`.`Nombre`, `r0`.`ID`, `r0`.`Created`, `r0`.`Expires`, `r0`.`Revoked`, `r0`.`Token`, `r0`.`UsuarioId`
+FROM (
+    SELECT `u`.`ID`, `u`.`Apellido`, `u`.`CorreoElectronico`, `u`.`Nom_user`, `u`.`Password`
+    FROM `Usuario` AS `u`
+    WHERE LOWER(`u`.`Nom_user`) = @__ToLower_0
+    LIMIT 1
+) AS `t`
+LEFT JOIN (
+    SELECT `u0`.`UsuarioId`, `u0`.`RolId`, `r`.`ID`, `r`.`Nombre`
+    FROM `UsuarioRoles` AS `u0`
+    INNER JOIN `Rol` AS `r` ON `u0`.`RolId` = `r`.`ID`
+) AS `t0` ON `t`.`ID` = `t0`.`UsuarioId`
+LEFT JOIN `RefreshToken` AS `r0` ON `t`.`ID` = `r0`.`UsuarioId`
+ORDER BY `t`.`ID`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`
+[2023-10-08 13:33:22.304 -06:00 INF] Executing OkObjectResult, writing value of type 'API.Dtos.DatosUsuarioDto'.
+[2023-10-08 13:33:22.315 -06:00 INF] Executed action API.Controllers.UsuarioController.GetTokenAsync (API) in 209.6368ms
+[2023-10-08 13:33:22.316 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-10-08 13:33:22.316 -06:00 INF] Request finished HTTP/1.1 POST https://localhost:5001/api/usuario/token application/json 58 - 200 - application/json;+charset=utf-8 215.2273ms
+[2023-10-08 13:33:59.767 -06:00 INF] Request starting HTTP/1.1 POST https://localhost:5001/api/usuario/register application/json 141
+[2023-10-08 13:33:59.775 -06:00 INF] Bearer was not authenticated. Failure message: No SecurityTokenValidator available for token.
+[2023-10-08 13:33:59.775 -06:00 INF] Executing endpoint 'API.Controllers.UsuarioController.RegisterAsync (API)'
+[2023-10-08 13:33:59.780 -06:00 INF] Route matched with {action = "Register", controller = "Usuario"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] RegisterAsync(API.Dtos.RegisterDto) on controller API.Controllers.UsuarioController (API).
+[2023-10-08 13:33:59.794 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-08 13:33:59.809 -06:00 INF] Executed DbCommand (2ms) [Parameters=[@__ToLower_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `u`.`ID`, `u`.`Apellido`, `u`.`CorreoElectronico`, `u`.`Nom_user`, `u`.`Password`
+FROM `Usuario` AS `u`
+WHERE LOWER(`u`.`Nom_user`) = @__ToLower_0
+[2023-10-08 13:33:59.875 -06:00 INF] Executed DbCommand (57ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `r`.`ID`, `r`.`Nombre`
+FROM `Rol` AS `r`
+WHERE `r`.`Nombre` = 'Empleado'
+[2023-10-08 13:34:00.397 -06:00 INF] Executed DbCommand (179ms) [Parameters=[@p0='?' (Size = 255), @p1='?' (Size = 255), @p2='?' (Size = 255), @p3='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO `Usuario` (`Apellido`, `CorreoElectronico`, `Nom_user`, `Password`)
+VALUES (@p0, @p1, @p2, @p3);
+SELECT `ID`
+FROM `Usuario`
+WHERE ROW_COUNT() = 1 AND `ID` = LAST_INSERT_ID();
+[2023-10-08 13:34:00.432 -06:00 INF] Executed DbCommand (5ms) [Parameters=[@p4='?' (DbType = Int32), @p5='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO `UsuarioRoles` (`RolId`, `UsuarioId`)
+VALUES (@p4, @p5);
+[2023-10-08 13:34:00.479 -06:00 INF] Executing OkObjectResult, writing value of type 'System.String'.
+[2023-10-08 13:34:00.479 -06:00 INF] Executed action API.Controllers.UsuarioController.RegisterAsync (API) in 699.0404ms
+[2023-10-08 13:34:00.479 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.RegisterAsync (API)'
+[2023-10-08 13:34:00.479 -06:00 INF] Request finished HTTP/1.1 POST https://localhost:5001/api/usuario/register application/json 141 - 200 - text/plain;+charset=utf-8 712.4041ms

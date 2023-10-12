@@ -12,6 +12,7 @@ public interface IUnitOfWork
     IUsuarioRepository Usuarios { get; }
     IReporteRepository Reportes { get; }
     IProveedorRepository CteProvs { get; }
+    IRolRepository Roles { get; }
     Task<int> SaveAsync();
 
 }

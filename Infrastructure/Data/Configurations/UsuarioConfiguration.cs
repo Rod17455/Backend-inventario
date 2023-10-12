@@ -22,6 +22,31 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
             .HasMaxLength(255)
             .HasColumnName("Nom_user");
         builder.Property(e => e.Password).HasMaxLength(255);
-        builder.Property(e => e.Rol).HasMaxLength(20);
+        builder
+          .HasMany(p => p.Roles)
+          .WithMany(p => p.Usuarios)
+          .UsingEntity<UsuarioRoles>(
+                j => j
+                     .HasOne(pt => pt.Rol)
+                     .WithMany(t => t.UsuarioRoles)
+                     .HasForeignKey(pt => pt.RolId),
+                j => j
+                     .HasOne(pt => pt.Usuario)
+                     .WithMany(p => p.UsuarioRoles)
+                     .HasForeignKey(pt => pt.UsuarioId),
+                j =>
+                {
+                    j.HasKey(t => new
+                    {
+                        t.UsuarioId,
+                        t.RolId
+
+                    });
+                }
+            );
+        builder.HasMany(p => p.RefreshTokens)
+           .WithOne(p => p.Usuario)
+           .HasForeignKey(p => p.UsuarioId);
+       
     }
 }

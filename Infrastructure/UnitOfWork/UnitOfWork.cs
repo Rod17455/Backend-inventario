@@ -16,6 +16,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     private IReporteRepository _reportes;
     private IProveedorRepository _cteprovs;
     private IUsuarioRepository _usuarios;
+    private IRolRepository _roles;
 
     public UnitOfWork(InventarioContext context)
     {
@@ -69,6 +70,20 @@ public class UnitOfWork : IUnitOfWork, IDisposable
             return _usuarios;
         }
     }
+
+    public IRolRepository Roles
+    {
+        get
+        {
+            if (_roles == null)
+            {
+                _roles = new RolRepository(_context);
+            }
+            return _roles;
+        }
+    }
+
+
 
     /*public async Task<int> SaveAsyn()
     {

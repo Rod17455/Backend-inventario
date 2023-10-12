@@ -34,11 +34,19 @@ public class ProveedorRepository : GenericRepository<CteProv>, IProveedorReposit
     }
 
     public override async Task<(int totalRegistros, IEnumerable<CteProv> registros)> GetAllAsync(
-        int pageIndex, int pageSize)
+        int pageIndex, int pageSize, string search)
     {
-        var totalRegistros = await _context.CteProvs.CountAsync();
 
-        var registros = await _context.CteProvs
+        var consulta = _context.CteProvs as IQueryable<CteProv>;    
+
+        if(!String.IsNullOrEmpty(search))
+        {
+            consulta = consulta.Where(p => p.NombreEmpresa.ToLower().Contains(search));
+        }
+
+        var totalRegistros = await consulta.CountAsync();
+
+        var registros = await consulta
                                     .Skip((pageIndex -1) * pageSize)
                                     .Take(pageSize)
                                     .ToListAsync();

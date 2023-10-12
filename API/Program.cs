@@ -1,10 +1,19 @@
 ﻿using API.Extension;
+using API.Helpers.Errors;
 using AspNetCoreRateLimit;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var logger = new LoggerConfiguration()
+                    .ReadFrom.Configuration(builder.Configuration)
+                    .Enrich.FromLogContext()
+                    .CreateLogger();
+
+builder.Logging.AddSerilog(logger);
 
 builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
 
@@ -13,11 +22,16 @@ builder.Services.ConfigureRateLimition();
 builder.Services.ConfigureCors();
 builder.Services.AddAplicationServices();
 builder.Services.ConfigureApiVersioning();
+builder.Services.AddJwt(builder.Configuration);
+
+
 builder.Services.AddControllers(options =>
 {
     options.RespectBrowserAcceptHeader = true;
     options.ReturnHttpNotAcceptable = true;
 }).AddXmlSerializerFormatters();
+
+builder.Services.AddValidationErrors();
 
 builder.Services.AddDbContext<InventarioContext>(options => {
     try
@@ -39,6 +53,10 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseStatusCodePagesWithReExecute("/errors/{0}");
+
 app.UseIpRateLimiting();
 
 // Configure the HTTP request pipeline.
@@ -56,17 +74,21 @@ using (var scope = app.Services.CreateScope())
     {
         var context = services.GetRequiredService<InventarioContext>();
         await context.Database.MigrateAsync();
+        await InventarioContextSeed.SeedRolesAsync(context, loggerFactory);
     }
     catch (Exception ex)
     {
-        var logger = loggerFactory.CreateLogger<Program>();
-        logger.LogError(ex, "Ocurrio un error durante la migraci�n");
+        var _logger = loggerFactory.CreateLogger<Program>();
+        _logger.LogError(ex, "Ocurrio un error durante la migración");
     }
 }
 
 app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseAuthorization();
 

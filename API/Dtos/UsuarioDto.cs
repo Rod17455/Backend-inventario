@@ -7,5 +7,5 @@ public class UsuarioDto
     public string Apellido { get; set; } = null!;
     public string CorreoElectronico { get; set; } = null!;
     public string Password { get; set; } = null!;
-    public string Rol { get; set; } = null!;
+    //public string Rol { get; set; } = null!;
 }
