@@ -28,6 +28,7 @@ public class ProveedorController : BaseApiController
     }
 
     //[HttpPost("register")]
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<Pager<CteProvDto>>> GetProveedor([FromQuery] Params cteProvParams)
@@ -63,6 +64,10 @@ public class ProveedorController : BaseApiController
     public async Task<ActionResult<CteProv>> Post(CteProvDto cteProvDto)
     {
         var cteProv = _mapper.Map<CteProv>(cteProvDto);
+        var cteprovBd = await _unitOfWork.CteProvs.GetByIdAsync(cteProvDto.ID);
+        if (cteprovBd != null)
+            return NotFound(new ApiResponse(404, "No puedes repetir el ID del proveedor"));
+
         _unitOfWork.CteProvs.Add(cteProv);
         await _unitOfWork.SaveAsync();
         if(cteProv == null)

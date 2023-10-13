@@ -651,3 +651,40 @@ SELECT ROW_COUNT();
 [2023-10-11 22:21:21.147 -06:00 INF] Executed action API.Controllers.ProveedorController.Put (API) in 180.6092ms
 [2023-10-11 22:21:21.147 -06:00 INF] Executed endpoint 'API.Controllers.ProveedorController.Put (API)'
 [2023-10-11 22:21:21.147 -06:00 INF] Request finished HTTP/1.1 PUT https://localhost:5001/api/proveedor/edit/3 application/json 222 - 200 - application/json;+charset=utf-8 193.8355ms
+[2023-10-11 22:27:27.351 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-11 22:27:27.882 -06:00 INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-10-11 22:27:27.920 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-10-11 22:27:27.952 -06:00 INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+[2023-10-11 22:27:27.975 -06:00 INF] No migrations were applied. The database is already up to date.
+[2023-10-11 22:27:28.206 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Rol` AS `r`)
+[2023-10-11 22:27:28.325 -06:00 INF] User profile is available. Using 'C:\Users\Rodrigo Tellez\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2023-10-11 22:27:28.414 -06:00 INF] Now listening on: https://localhost:5001
+[2023-10-11 22:27:28.414 -06:00 INF] Now listening on: http://localhost:5000
+[2023-10-11 22:27:28.419 -06:00 INF] Application started. Press Ctrl+C to shut down.
+[2023-10-11 22:27:28.419 -06:00 INF] Hosting environment: Development
+[2023-10-11 22:27:28.419 -06:00 INF] Content root path: D:\10CUATRIMESTRE\HECTOR\Backend\inventario\API\
+[2023-10-11 22:27:38.990 -06:00 INF] Request starting HTTP/1.1 GET https://localhost:5001/api/proveedor?pageSize=5&pageIndex=1&search= - -
+[2023-10-11 22:27:39.543 -06:00 INF] Executing endpoint 'API.Controllers.ProveedorController.GetProveedor (API)'
+[2023-10-11 22:27:39.576 -06:00 INF] Route matched with {action = "GetProveedor", controller = "Proveedor"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[API.Helpers.Pager`1[API.Dtos.CteProvDto]]] GetProveedor(API.Helpers.Params) on controller API.Controllers.ProveedorController (API).
+[2023-10-11 22:27:39.725 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-11 22:27:39.751 -06:00 INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Cte_prov` AS `c`
+[2023-10-11 22:27:39.799 -06:00 WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+[2023-10-11 22:27:39.800 -06:00 WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+[2023-10-11 22:27:39.897 -06:00 INF] Executed DbCommand (25ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `c`.`ID`, `c`.`Contacto`, `c`.`CorreoElectronico`, `c`.`Direccion`, `c`.`NombreEmpresa`, `c`.`Telefono`
+FROM `Cte_prov` AS `c`
+LIMIT @__p_1 OFFSET @__p_0
+[2023-10-11 22:27:39.990 -06:00 INF] Executing ObjectResult, writing value of type 'API.Helpers.Pager`1[[API.Dtos.CteProvDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-10-11 22:27:40.036 -06:00 INF] Executed action API.Controllers.ProveedorController.GetProveedor (API) in 451.7278ms
+[2023-10-11 22:27:40.037 -06:00 INF] Executed endpoint 'API.Controllers.ProveedorController.GetProveedor (API)'
+[2023-10-11 22:27:40.042 -06:00 INF] Request finished HTTP/1.1 GET https://localhost:5001/api/proveedor?pageSize=5&pageIndex=1&search= - - - 200 - application/json;+charset=utf-8 1055.4373ms

@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Entities.Personalizadas;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,8 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         _context = context;
     }
 
+
+
     public virtual void Add(T entity)
     {
         _context.Set<T>().Add(entity);
@@ -28,6 +31,26 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     public virtual void AddRange(IEnumerable<T> entities)
     {
         _context.Set<T>().AddRange(entities);
+    }
+
+    public async Task<InformacionProducto> DetalleProducto(int idProducto)
+    {
+        var detalle = (
+               from p in _context.Productos
+               join c in _context.CteProvs on p.CveProv equals c.ID
+               where p.ID == idProducto
+               select new InformacionProducto
+               {
+                   NomProd = p.NomProd,
+                   Categoria = p.Categoria,
+                   DescProd = p.DescProd,
+                   NombEmpresa = p.CveProv + " - " + c.NombreEmpresa,
+                   Precio = p.Precio,
+                   Stock = p.Stock
+               }
+           ).FirstOrDefaultAsync();
+
+        return await detalle;
     }
 
     public virtual IEnumerable<T> Find(Expression<Func<T, bool>> expression)

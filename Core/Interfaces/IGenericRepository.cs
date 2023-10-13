@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Entities.Personalizadas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Core.Interfaces;
 
 public interface IGenericRepository<T> where T : BaseEntity
 {
-
+    Task<InformacionProducto> DetalleProducto(int idProducto);
     Task<T> GetByIdAsync(int id);
     Task<IEnumerable<T>> GetAllAsync();
     IEnumerable<T> Find(Expression<Func<T, bool>> expression);
