@@ -1491,3 +1491,41 @@ LIMIT 1
 [2023-10-12 18:33:15.403 -06:00 INF] Executed action API.Controllers.ProductoController.PostOCDetalle (API) in 11.3235ms
 [2023-10-12 18:33:15.403 -06:00 INF] Executed endpoint 'API.Controllers.ProductoController.PostOCDetalle (API)'
 [2023-10-12 18:33:15.404 -06:00 INF] Request finished HTTP/1.1 POST https://localhost:5001/api/producto/detalle application/json 16 - 200 - application/json;+charset=utf-8 16.6383ms
+[2023-10-12 22:54:27.699 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-12 22:54:28.526 -06:00 INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-10-12 22:54:28.570 -06:00 INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-10-12 22:54:28.628 -06:00 INF] Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+[2023-10-12 22:54:28.667 -06:00 INF] No migrations were applied. The database is already up to date.
+[2023-10-12 22:54:28.989 -06:00 INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Rol` AS `r`)
+[2023-10-12 22:54:29.227 -06:00 INF] User profile is available. Using 'C:\Users\Rodrigo Tellez\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2023-10-12 22:54:29.543 -06:00 INF] Now listening on: https://localhost:5001
+[2023-10-12 22:54:29.543 -06:00 INF] Now listening on: http://localhost:5000
+[2023-10-12 22:54:29.553 -06:00 INF] Application started. Press Ctrl+C to shut down.
+[2023-10-12 22:54:29.553 -06:00 INF] Hosting environment: Development
+[2023-10-12 22:54:29.553 -06:00 INF] Content root path: D:\10CUATRIMESTRE\HECTOR\Backend\inventario\API\
+[2023-10-12 22:54:37.597 -06:00 INF] Request starting HTTP/1.1 POST https://localhost:5001/api/usuario/detalle application/json 16
+[2023-10-12 22:54:40.103 -06:00 INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '13/10/2023 12:45:26 a. m.', Current time: '13/10/2023 04:54:40 a. m.'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+[2023-10-12 22:54:40.188 -06:00 INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '13/10/2023 12:45:26 a. m.', Current time: '13/10/2023 04:54:40 a. m.'.
+[2023-10-12 22:54:40.197 -06:00 INF] Executing endpoint 'API.Controllers.UsuarioController.PostOCDetalle (API)'
+[2023-10-12 22:54:40.247 -06:00 INF] Route matched with {action = "PostOCDetalle", controller = "Usuario"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Core.Entities.Usuario]] PostOCDetalle(Core.Entities.Usuario) on controller API.Controllers.UsuarioController (API).
+[2023-10-12 22:54:40.561 -06:00 INF] Executing BadRequestObjectResult, writing value of type 'API.Helpers.Errors.ApiValidation'.
+[2023-10-12 22:54:40.592 -06:00 INF] Executed action API.Controllers.UsuarioController.PostOCDetalle (API) in 331.3444ms
+[2023-10-12 22:54:40.592 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.PostOCDetalle (API)'
+[2023-10-12 22:54:40.597 -06:00 INF] Request finished HTTP/1.1 POST https://localhost:5001/api/usuario/detalle application/json 16 - 400 - application/json;+charset=utf-8 3003.7440ms

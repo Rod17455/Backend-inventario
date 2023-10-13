@@ -9,13 +9,13 @@ namespace Core.Entities;
 public class Usuario : BaseEntity
 {
 
-    public string NomUser { get; set; } = null!;
+    public string? NomUser { get; set; }
 
-    public string Apellido { get; set; } = null!;
+    public string? Apellido { get; set; }
 
-    public string CorreoElectronico { get; set; } = null!;
+    public string? CorreoElectronico { get; set; }
 
-    public string Password { get; set; } = null!;
+    public string? Password { get; set; }
 
     public ICollection<Rol> Roles { get; set; } = new HashSet<Rol>();
     public ICollection<RefreshToken> RefreshTokens { get; set; } = new HashSet<RefreshToken>();

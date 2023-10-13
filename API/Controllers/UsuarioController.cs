@@ -1,6 +1,10 @@
 ﻿using API.Dtos;
 using API.Helpers.Errors;
 using API.Services;
+using AutoMapper;
+using Core.Entities;
+using Core.Entities.Personalizadas;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -12,11 +16,67 @@ public class UsuarioController : BaseApiController
 {
     private readonly IUserService _userService;
     private readonly ILogger<UsuarioController> _logger;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
 
-    public UsuarioController(IUserService userService, ILogger<UsuarioController> logger)
+    public UsuarioController(IUserService userService, ILogger<UsuarioController> logger, IUnitOfWork unitOfWork, IMapper mapper)
     {
         _userService = userService;
         _logger = logger;
+        _unitOfWork = unitOfWork;
+        _mapper = mapper;
+    }
+
+    //VER INFORMACIÓN DE UN USUARIO
+    [HttpPost("detalle")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult<InformacionUsuario>> PostOCDetalle(InformacionUsuario detail)
+    {
+
+        try
+        {
+            var _detalle = await _unitOfWork.Usuarios.DetalleUsuario(detail.ID);
+
+            if (_detalle == null)
+            {
+                return NotFound(new ApiResponse(404));
+            }
+
+            var response = new
+            {
+                Success = true,
+                Data = _mapper.Map<InformacionUsuario>(_detalle)
+            };
+
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPut("edit/{id}")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<UsuarioDto>> Put(int id, [FromBody] UsuarioDto usuarioDto)
+    {
+        if (usuarioDto == null)
+            return NotFound(new ApiResponse(404, "El usuario solicitado no existe"));
+
+        var usuarioBd = await _unitOfWork.Usuarios.GetByIdAsync(id);
+        if (usuarioBd == null)
+            return NotFound(new ApiResponse(404, "El usuario solicitado no existe"));
+
+        var usuario = _mapper.Map<Usuario>(usuarioDto);
+        _unitOfWork.Usuarios.Update(usuario);
+        await _unitOfWork.SaveAsync();
+        return usuarioDto;
     }
 
     [HttpPost("register")]
