@@ -113,6 +113,13 @@ public class UsuarioController : BaseApiController
             }
 
             SetRefreshTokenInCookie(result.RefreshToken);
+            /*var response = new
+            {
+                Message = "Usuario logeado",
+                Success = true,
+                Data = result
+            };*/
+
             return Ok(result);
         } catch(Exception ex)
         {
@@ -148,6 +155,13 @@ public class UsuarioController : BaseApiController
         var response = await _userService.RefreshTokenAsync(refreshToken);
         if (!string.IsNullOrEmpty(response.RefreshToken))
             SetRefreshTokenInCookie(response.RefreshToken);
+
+        /*var result = new
+            {
+                Message = "Usuario logeado",
+                Success = true,
+                Data = response
+            };*/
         return Ok(response);
     }
 
