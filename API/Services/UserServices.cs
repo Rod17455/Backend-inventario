@@ -255,7 +255,9 @@ public class UserServices : IUserService
                                 new Claim(JwtRegisteredClaimNames.Sub, usuario.NomUser),
                                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                                 new Claim(JwtRegisteredClaimNames.Email, usuario.CorreoElectronico),
-                                new Claim("uid", usuario.ID.ToString())
+                                new Claim("uid", usuario.ID.ToString()),
+                                new Claim("userName", usuario.NomUser)
+
         }
         .Union(roleClaims);
         var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwt.Key));

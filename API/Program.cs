@@ -85,7 +85,7 @@ using (var scope = app.Services.CreateScope())
 
 app.UseCors("CorsPolicy");
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -109,18 +109,19 @@ public class UsuarioController : BaseApiController
 
             if(result.EstaAutenticado == false)
             {
-                return NotFound(new ApiResponse(404, "El usuario no existe"));
+                return NotFound(new ApiResponse(404, result.Mensaje));
             }
 
-            SetRefreshTokenInCookie(result.RefreshToken);
-            /*var response = new
+            var response = new
             {
-                Message = "Usuario logeado",
+                Message = "Usuario encontrado",
                 Success = true,
                 Data = result
-            };*/
+            };
 
-            return Ok(result);
+            SetRefreshTokenInCookie(result.RefreshToken);
+
+            return Ok(response);
         } catch(Exception ex)
         {
             _logger.LogError("Error en el endpoint de login: "+ex.Message);
