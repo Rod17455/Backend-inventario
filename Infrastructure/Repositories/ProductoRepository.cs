@@ -25,7 +25,7 @@ public class ProductoRepository : GenericRepository<Producto>, IProductoReposito
 
     public override async Task<IEnumerable<Producto>> GetAllAsync()
     {
-        return await _context.Productos.ToListAsync();
+        return await _context.Productos.Where(x => x.Estatus != 4).ToListAsync();
     }
 
     public override async Task<(int totalRegistros, IEnumerable<Producto> registros)> GetAllAsync(
@@ -34,15 +34,17 @@ public class ProductoRepository : GenericRepository<Producto>, IProductoReposito
 
         // var consulta = _context.Productos as IQueryable<Producto>;
         var consulta = _context.Productos as IQueryable<Producto>;
+        // Solo muestra las que son diferentes del estatus 4
+        var _consulta = consulta.Where(x => x.Estatus != 4);
 
         if (!String.IsNullOrEmpty(search))
         {
-            consulta = consulta.Where(p => p.NomProd.ToLower().Contains(search));
+            _consulta = _consulta.Where(p => p.NomProd.ToLower().Contains(search));
         }
 
-        var totalRegistros = await consulta.CountAsync();
+        var totalRegistros = await _consulta.CountAsync();
 
-        var registros = await consulta
+        var registros = await _consulta
                                     .Skip((pageIndex - 1) * pageSize)
                                     .Take(pageSize)
                                     .ToListAsync();

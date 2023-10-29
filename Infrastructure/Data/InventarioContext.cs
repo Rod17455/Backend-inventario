@@ -25,6 +25,8 @@ public class InventarioContext : DbContext
 
     public  DbSet<Rol> Roles { get; set; }
 
+    public DbSet<EscasezProducto> Escasezes { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

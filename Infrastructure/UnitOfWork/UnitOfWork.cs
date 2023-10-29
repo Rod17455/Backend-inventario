@@ -17,10 +17,23 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     private IProveedorRepository _cteprovs;
     private IUsuarioRepository _usuarios;
     private IRolRepository _roles;
+    private IEscasezRepository _escasezes;
 
     public UnitOfWork(InventarioContext context)
     {
         _context = context;
+    }
+
+    public IEscasezRepository Escasezes
+    {
+        get
+        {
+            if (_escasezes == null)
+            {
+                _escasezes = new EscasesRepository(_context);
+            }
+            return _escasezes;
+        }
     }
 
     public IProductoRepository Productos

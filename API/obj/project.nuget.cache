@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "W48NlhWQw6xBWLmxT3u5IvMn4JBgvG6Jdolbv8AgzW3h8ljWRNDJrtAFMKREOP7jg7Tw51vbs7R+yo6M/JJL7Q==",
+  "dgSpecHash": "0jxmabTURa3eoJgKEshMVD5s2TzB9lc5Gd4MKvwd22smmvv8EfkAchv4pQCAB5BJlXzg/Ow8O+72V4zn0GxQyw==",
   "success": true,
   "projectFilePath": "D:\\10CUATRIMESTRE\\HECTOR\\Backend\\inventario\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rodrigo Tellez\\.nuget\\packages\\aspnetcoreratelimit\\5.0.0\\aspnetcoreratelimit.5.0.0.nupkg.sha512",
     "C:\\Users\\Rodrigo Tellez\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\Rodrigo Tellez\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+    "C:\\Users\\Rodrigo Tellez\\.nuget\\packages\\firebaseauthentication.net\\4.1.0\\firebaseauthentication.net.4.1.0.nupkg.sha512",
     "C:\\Users\\Rodrigo Tellez\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Rodrigo Tellez\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.4\\microsoft.aspnetcore.authentication.jwtbearer.6.0.4.nupkg.sha512",
     "C:\\Users\\Rodrigo Tellez\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\5.0.0\\microsoft.aspnetcore.mvc.versioning.5.0.0.nupkg.sha512",

@@ -1,6 +1,7 @@
 ﻿using API.Helpers;
 using API.Helpers.Errors;
 using API.Services;
+using API.Services.ProductosPendientes;
 using AspNetCoreRateLimit;
 using Core.Entities;
 using Core.Interfaces;
@@ -36,6 +37,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IProveedorRepository, ProveedorRepository>();*/
         services.AddScoped<IPasswordHasher<Usuario>, PasswordHasher<Usuario>>();
         services.AddScoped<IUserService, UserServices>();
+        services.AddScoped<IProductoPendiente, ProductoPendiente>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 

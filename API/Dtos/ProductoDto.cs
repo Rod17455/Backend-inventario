@@ -8,6 +8,7 @@ public class ProductoDto
     public string? Categoria { get; set; }
     public decimal? Precio { get; set; }
     public int? Stock { get; set; }
+    public int? Estatus { get; set; }
     //public string? NombEmpresa { get; set; }
     //public string? Imagen { get; set; }
 }

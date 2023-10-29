@@ -13,6 +13,7 @@ public interface IUnitOfWork
     IReporteRepository Reportes { get; }
     IProveedorRepository CteProvs { get; }
     IRolRepository Roles { get; }
+    IEscasezRepository Escasezes { get; }
     Task<int> SaveAsync();
 
 }

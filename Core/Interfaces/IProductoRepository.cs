@@ -10,7 +10,5 @@ namespace Core.Interfaces;
 
 public interface IProductoRepository : IGenericRepository<Producto>
 {
-    //Task<Detalle> DetalleOrdenCompra(int cveOrden);
-    //Task<InformacionProducto> DetalleProducto(int idProducto);
     Task<int> GetTotalProductos();
 }

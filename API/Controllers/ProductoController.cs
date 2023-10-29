@@ -29,7 +29,7 @@ public class ProductoController : BaseApiController
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Pager<ProductoDto>>> GetProveedor([FromQuery] Params productoParams)
+    public async Task<ActionResult<Pager<ProductoDto>>> GetProducto([FromQuery] Params productoParams)
     {
 
         var resultado = await _unitOfWork.Productos.

@@ -28,9 +28,13 @@ namespace Infrastructure.Data.Configurations
                 .HasMaxLength(255)
                 .HasColumnName("Nom_prod");
             builder.Property(e => e.Precio).HasPrecision(10, 2);
-           /* builder.Property(e => e.Imagen)
-                .HasMaxLength(255)
-                .HasColumnName("Imagen");*/
+            builder.Property(e => e.Estatus)
+               .HasColumnType("int")
+                .IsRequired()
+                .HasColumnName("Estatus");
+            /* builder.Property(e => e.Imagen)
+                 .HasMaxLength(255)
+                 .HasColumnName("Imagen");*/
         }
     }
 }
