@@ -23,4 +23,11 @@ public class InformacionProducto : BaseEntity
     public string? Imagen { get; set; }
 
     public string? Estatus { get; set; }
+
+    public string? NombProv { get; set; }
+
+    public string? TelefonoProv { get; set; }
+
+    public string? EmailProv { get; set; }
+
 }

@@ -27,6 +27,9 @@ public class InventarioContext : DbContext
 
     public DbSet<EscasezProducto> Escasezes { get; set; }
 
+    public DbSet<Estatus> Estatuses { get; set; }
+    public DbSet<Autorizacion> Autorizaciones { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

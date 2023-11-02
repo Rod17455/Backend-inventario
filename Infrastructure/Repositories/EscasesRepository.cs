@@ -25,10 +25,11 @@ public class EscasesRepository : GenericRepository<InformacionEscasez>, IEscasez
             from p in _context.Escasezes
             join c in _context.Productos on p.ProductoId equals c.ID
             join u in _context.Usuarios on p.UsuarioId equals u.ID
+            join e in _context.Estatuses on p.Estatus equals e.ID
             select new InformacionEscasez
             {
                 ID = p.ID,
-                Estatus = p.Estatus,
+                Estatus = p.Estatus + " - " + e.NombEstatus,
                 Cant_Soli = p.Cant_Soli,
                 Fecha_Registro = p.Fecha_Registro,
                 Nom_Producto = c.NomProd,
@@ -49,10 +50,11 @@ public class EscasesRepository : GenericRepository<InformacionEscasez>, IEscasez
            from p in _context.Escasezes
            join c in _context.Productos on p.ProductoId equals c.ID
            join u in _context.Usuarios on p.UsuarioId equals u.ID
+           join e in _context.Estatuses on p.Estatus equals e.ID
            select new InformacionEscasez
            {
                ID = p.ID,
-               Estatus = p.Estatus,
+               Estatus = p.Estatus + " - " + e.NombEstatus,
                Cant_Soli = p.Cant_Soli,
                Fecha_Registro = p.Fecha_Registro,
                Nom_Producto = c.NomProd,
@@ -118,6 +120,43 @@ public class EscasesRepository : GenericRepository<InformacionEscasez>, IEscasez
                                     ({0},{1},{2},{3},{4},{5})
                                  ", escasezProducto.ProductoId, escasezProducto.Cant_Soli, escasezProducto.Fecha_Registro,
                                     escasezProducto.UsuarioId, escasezProducto.Estatus, escasezProducto.Precio);
+
+
+        return await Task.FromResult(insertEscasez);
+    }
+
+    public async Task<int> ActualizarEstatusProducto(int idProducto, int estatus)
+    {
+        int update = _context.Database.ExecuteSqlRaw(@"UPDATE Producto
+                                                                SET Estatus = {0}
+                                                                WHERE ID = {1}", estatus, idProducto);
+
+        return await Task.FromResult(update);
+    }
+
+    public async Task<int> ActualizarEstatusEscasez(int idEscasez, int estatus)
+    {
+        int update = _context.Database.ExecuteSqlRaw(@"UPDATE Escasez_Producto
+                                                                SET Estatus = {0}
+                                                                WHERE ID = {1}", estatus, idEscasez);
+
+        return await Task.FromResult(update);
+    }
+
+    public async Task<int> InsertarEscasez(Autorizacion autorizacion)
+    {
+        int insertEscasez = _context
+                              .Database
+                              .ExecuteSqlRaw(@"
+                                    INSERT INTO Autorizacion
+                                    (
+                                    Escasez_prod_id,
+                                    Usuario_id,
+                                    Fecha_autoriza,
+                                    Estado_autoriza)
+                                    VALUES
+                                    ({0},{1},{2},{3})
+                                 ", autorizacion.Id_Escasez, autorizacion.Id_Usuario, autorizacion.Fecha_Autoriza, autorizacion.Estatus);
 
 
         return await Task.FromResult(insertEscasez);

@@ -33,11 +33,42 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         _context.Set<T>().AddRange(entities);
     }
 
+    public async Task<DetalleEscasez> DetalleEscasez(int idEscasez)
+    {
+        var consulta = (
+          from p in _context.Escasezes
+          join c in _context.Productos on p.ProductoId equals c.ID
+          join u in _context.Usuarios on p.UsuarioId equals u.ID
+          join e in _context.Estatuses on p.Estatus equals e.ID
+          join prov in _context.CteProvs on c.ID equals prov.ID
+          where p.ID == idEscasez
+          select new DetalleEscasez
+          {
+              ID = p.ID,
+              Estatus = p.Estatus + " - " + e.NombEstatus,
+              Cant_Soli = p.Cant_Soli,
+              Fecha_Registro = p.Fecha_Registro,
+              Nom_Producto = c.NomProd,
+              Nom_Usuario = u.Apellido,
+              Precio = p.Precio,
+              Correo_Usuario = u.CorreoElectronico,
+              Email_Prov = prov.CorreoElectronico,
+              Nomb_Prov = prov.Contacto,
+              Telefono_Prov = prov.Telefono,
+              Nomb_Empresa = prov.NombreEmpresa,
+              Id_Producto = c.ID
+              
+          }).FirstOrDefaultAsync();
+
+        return await consulta;
+    }
+
     public async Task<InformacionProducto> DetalleProducto(int idProducto)
     {
         var detalle = (
                from p in _context.Productos
                join c in _context.CteProvs on p.CveProv equals c.ID
+               join e in _context.Estatuses on p.Estatus equals e.ID
                where p.ID == idProducto
                select new InformacionProducto
                {
@@ -46,7 +77,12 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
                    DescProd = p.DescProd,
                    NombEmpresa = p.CveProv + " - " + c.NombreEmpresa,
                    Precio = p.Precio,
-                   Stock = p.Stock
+                   Stock = p.Stock,
+                   Estatus = p.Estatus + " - " + e.NombEstatus,
+                   NombProv = c.Contacto,
+                   EmailProv = c.CorreoElectronico,
+                   TelefonoProv = c.Telefono,
+                   ID = p.ID
                }
            ).FirstOrDefaultAsync();
 

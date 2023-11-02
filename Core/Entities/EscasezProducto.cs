@@ -12,7 +12,7 @@ public class EscasezProducto : BaseEntity
     public int Cant_Soli { get; set; }
     public DateTime Fecha_Registro { get; set; }
     public int UsuarioId { get; set; }
-    public string? Estatus { get; set; }
+    public int? Estatus { get; set; }
     public decimal? Precio { get; set; }
     /*
      ProductoId int not null,

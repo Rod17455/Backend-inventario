@@ -125,6 +125,7 @@ public class UserServices : IUserService
         _unitOfWork.Usuarios.Update(usuario);
         await _unitOfWork.SaveAsync();
         //Generamos un nuevo Json Web Token 😊
+        datosUsuarioDto.Id = usuario.ID;
         datosUsuarioDto.EstaAutenticado = true;
         JwtSecurityToken jwtSecurityToken = CreateJwtToken(usuario);
         datosUsuarioDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
@@ -155,6 +156,7 @@ public class UserServices : IUserService
 
         if (resultado == PasswordVerificationResult.Success)
         {
+            datosUsuarioDto.Id = usuario.ID;
             datosUsuarioDto.EstaAutenticado = true;
             JwtSecurityToken jwtSecurityToken = CreateJwtToken(usuario);
             datosUsuarioDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);

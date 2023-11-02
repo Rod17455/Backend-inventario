@@ -1,0 +1,453 @@
+[2023-11-01 19:45:17.129 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 19:45:17.656 -06:00 INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-11-01 19:45:17.692 -06:00 INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-11-01 19:45:17.800 -06:00 INF] Executed DbCommand (64ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+[2023-11-01 19:45:17.821 -06:00 INF] No migrations were applied. The database is already up to date.
+[2023-11-01 19:45:18.069 -06:00 INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Rol` AS `r`)
+[2023-11-01 19:45:18.285 -06:00 INF] User profile is available. Using 'C:\Users\Rodrigo Tellez\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2023-11-01 19:45:18.503 -06:00 INF] Now listening on: https://localhost:5001
+[2023-11-01 19:45:18.503 -06:00 INF] Now listening on: http://localhost:5000
+[2023-11-01 19:45:18.509 -06:00 INF] Application started. Press Ctrl+C to shut down.
+[2023-11-01 19:45:18.509 -06:00 INF] Hosting environment: Development
+[2023-11-01 19:45:18.510 -06:00 INF] Content root path: D:\10CUATRIMESTRE\HECTOR\Backend\inventario\API\
+[2023-11-01 19:45:24.256 -06:00 INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usuario/token application/json 58
+[2023-11-01 19:45:25.936 -06:00 INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '30/10/2023 12:16:00 a. m.', Current time: '02/11/2023 01:45:25 a. m.'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+[2023-11-01 19:45:26.031 -06:00 INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '30/10/2023 12:16:00 a. m.', Current time: '02/11/2023 01:45:25 a. m.'.
+[2023-11-01 19:45:26.036 -06:00 INF] Executing endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-11-01 19:45:26.066 -06:00 INF] Route matched with {action = "GetToken", controller = "Usuario"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTokenAsync(API.Dtos.LoginDto) on controller API.Controllers.UsuarioController (API).
+[2023-11-01 19:45:26.358 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 19:45:26.621 -06:00 WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+[2023-11-01 19:45:26.747 -06:00 INF] Executed DbCommand (62ms) [Parameters=[@__ToLower_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`ID`, `t`.`Apellido`, `t`.`CorreoElectronico`, `t`.`Nom_user`, `t`.`Password`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`, `t0`.`Nombre`, `r0`.`ID`, `r0`.`Created`, `r0`.`Expires`, `r0`.`Revoked`, `r0`.`Token`, `r0`.`UsuarioId`
+FROM (
+    SELECT `u`.`ID`, `u`.`Apellido`, `u`.`CorreoElectronico`, `u`.`Nom_user`, `u`.`Password`
+    FROM `Usuario` AS `u`
+    WHERE LOWER(`u`.`Nom_user`) = @__ToLower_0
+    LIMIT 1
+) AS `t`
+LEFT JOIN (
+    SELECT `u0`.`UsuarioId`, `u0`.`RolId`, `r`.`ID`, `r`.`Nombre`
+    FROM `UsuarioRoles` AS `u0`
+    INNER JOIN `Rol` AS `r` ON `u0`.`RolId` = `r`.`ID`
+) AS `t0` ON `t`.`ID` = `t0`.`UsuarioId`
+LEFT JOIN `RefreshToken` AS `r0` ON `t`.`ID` = `r0`.`UsuarioId`
+ORDER BY `t`.`ID`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`
+[2023-11-01 19:45:26.929 -06:00 INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[API.Dtos.DatosUsuarioDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-11-01 19:45:26.958 -06:00 INF] Executed action API.Controllers.UsuarioController.GetTokenAsync (API) in 885.9521ms
+[2023-11-01 19:45:26.958 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-11-01 19:45:26.967 -06:00 INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usuario/token application/json 58 - 200 - application/json;+charset=utf-8 2715.1544ms
+[2023-11-01 19:46:00.352 -06:00 INF] Request starting HTTP/1.1 GET http://localhost:5000/api/producto?pageSize=3&pageIndex=1&search= - -
+[2023-11-01 19:46:00.417 -06:00 INF] Executing endpoint 'API.Controllers.ProductoController.GetProducto (API)'
+[2023-11-01 19:46:00.426 -06:00 INF] Route matched with {action = "GetProducto", controller = "Producto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[API.Helpers.Pager`1[API.Dtos.ProductoDto]]] GetProducto(API.Helpers.Params) on controller API.Controllers.ProductoController (API).
+[2023-11-01 19:46:00.508 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 19:46:00.533 -06:00 INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Producto` AS `p`
+WHERE `p`.`Estatus` <> 4
+[2023-11-01 19:46:00.543 -06:00 WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+[2023-11-01 19:46:00.544 -06:00 WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+[2023-11-01 19:46:00.567 -06:00 INF] Executed DbCommand (10ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`ID`, `p`.`Categoria`, `p`.`Cve_prov`, `p`.`Desc_prod`, `p`.`Estatus`, `p`.`Nom_prod`, `p`.`Precio`, `p`.`Stock`
+FROM `Producto` AS `p`
+WHERE `p`.`Estatus` <> 4
+LIMIT @__p_1 OFFSET @__p_0
+[2023-11-01 19:46:00.612 -06:00 INF] Executing ObjectResult, writing value of type 'API.Helpers.Pager`1[[API.Dtos.ProductoDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-11-01 19:46:00.624 -06:00 INF] Executed action API.Controllers.ProductoController.GetProducto (API) in 197.8394ms
+[2023-11-01 19:46:00.624 -06:00 INF] Executed endpoint 'API.Controllers.ProductoController.GetProducto (API)'
+[2023-11-01 19:46:00.625 -06:00 INF] Request finished HTTP/1.1 GET http://localhost:5000/api/producto?pageSize=3&pageIndex=1&search= - - - 200 - application/json;+charset=utf-8 272.8788ms
+[2023-11-01 19:46:38.432 -06:00 INF] Request starting HTTP/1.1 GET https://localhost:5001/api/producto/3 - -
+[2023-11-01 19:46:38.437 -06:00 INF] Executing endpoint 'API.Controllers.ProductoController.GetId (API)'
+[2023-11-01 19:46:38.440 -06:00 INF] Route matched with {action = "GetId", controller = "Producto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[API.Dtos.ProductoDto]] GetId(Int32) on controller API.Controllers.ProductoController (API).
+[2023-11-01 19:46:38.445 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 19:46:38.463 -06:00 INF] Executed DbCommand (11ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`ID`, `p`.`Categoria`, `p`.`Cve_prov`, `p`.`Desc_prod`, `p`.`Estatus`, `p`.`Nom_prod`, `p`.`Precio`, `p`.`Stock`
+FROM `Producto` AS `p`
+WHERE `p`.`ID` = @__id_0
+LIMIT 1
+[2023-11-01 19:46:38.467 -06:00 INF] Executing ObjectResult, writing value of type 'API.Dtos.ProductoDto'.
+[2023-11-01 19:46:38.468 -06:00 INF] Executed action API.Controllers.ProductoController.GetId (API) in 27.7721ms
+[2023-11-01 19:46:38.468 -06:00 INF] Executed endpoint 'API.Controllers.ProductoController.GetId (API)'
+[2023-11-01 19:46:38.468 -06:00 INF] Request finished HTTP/1.1 GET https://localhost:5001/api/producto/3 - - - 200 - application/json;+charset=utf-8 36.4548ms
+[2023-11-01 19:47:08.893 -06:00 INF] Request starting HTTP/1.1 POST http://localhost:5000/api/producto/detalle application/json 16
+[2023-11-01 19:47:08.895 -06:00 INF] Executing endpoint 'API.Controllers.ProductoController.PostOCDetalle (API)'
+[2023-11-01 19:47:08.901 -06:00 INF] Route matched with {action = "PostOCDetalle", controller = "Producto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Core.Entities.Personalizadas.InformacionProducto]] PostOCDetalle(Core.Entities.Personalizadas.InformacionProducto) on controller API.Controllers.ProductoController (API).
+[2023-11-01 19:47:08.926 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 19:47:08.964 -06:00 INF] Executed DbCommand (6ms) [Parameters=[@__idProducto_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`Nom_prod` AS `NomProd`, `p`.`Categoria`, `p`.`Desc_prod` AS `DescProd`, CONCAT(CONCAT(CAST(`p`.`Cve_prov` AS char), ' - '), `c`.`NombreEmpresa`) AS `NombEmpresa`, `p`.`Precio`, `p`.`Stock`
+FROM `Producto` AS `p`
+INNER JOIN `Cte_prov` AS `c` ON `p`.`Cve_prov` = `c`.`ID`
+WHERE `p`.`ID` = @__idProducto_0
+LIMIT 1
+[2023-11-01 19:47:08.968 -06:00 INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[Core.Entities.Personalizadas.InformacionProducto, Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-11-01 19:47:08.971 -06:00 INF] Executed action API.Controllers.ProductoController.PostOCDetalle (API) in 69.9512ms
+[2023-11-01 19:47:08.971 -06:00 INF] Executed endpoint 'API.Controllers.ProductoController.PostOCDetalle (API)'
+[2023-11-01 19:47:08.971 -06:00 INF] Request finished HTTP/1.1 POST http://localhost:5000/api/producto/detalle application/json 16 - 200 - application/json;+charset=utf-8 78.3283ms
+[2023-11-01 20:21:48.054 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 20:21:48.586 -06:00 INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-11-01 20:21:48.619 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-11-01 20:21:48.651 -06:00 INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+[2023-11-01 20:21:48.673 -06:00 INF] No migrations were applied. The database is already up to date.
+[2023-11-01 20:21:48.884 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Rol` AS `r`)
+[2023-11-01 20:21:48.999 -06:00 INF] User profile is available. Using 'C:\Users\Rodrigo Tellez\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2023-11-01 20:21:49.181 -06:00 INF] Now listening on: https://localhost:5001
+[2023-11-01 20:21:49.181 -06:00 INF] Now listening on: http://localhost:5000
+[2023-11-01 20:21:49.185 -06:00 INF] Application started. Press Ctrl+C to shut down.
+[2023-11-01 20:21:49.185 -06:00 INF] Hosting environment: Development
+[2023-11-01 20:21:49.185 -06:00 INF] Content root path: D:\10CUATRIMESTRE\HECTOR\Backend\inventario\API\
+[2023-11-01 20:23:56.026 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 20:23:56.482 -06:00 INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-11-01 20:23:56.521 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-11-01 20:23:56.555 -06:00 INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+[2023-11-01 20:23:56.579 -06:00 INF] No migrations were applied. The database is already up to date.
+[2023-11-01 20:23:56.804 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Rol` AS `r`)
+[2023-11-01 20:23:56.925 -06:00 INF] User profile is available. Using 'C:\Users\Rodrigo Tellez\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2023-11-01 20:23:57.009 -06:00 INF] Now listening on: https://localhost:5001
+[2023-11-01 20:23:57.009 -06:00 INF] Now listening on: http://localhost:5000
+[2023-11-01 20:23:57.013 -06:00 INF] Application started. Press Ctrl+C to shut down.
+[2023-11-01 20:23:57.013 -06:00 INF] Hosting environment: Development
+[2023-11-01 20:23:57.013 -06:00 INF] Content root path: D:\10CUATRIMESTRE\HECTOR\Backend\inventario\API\
+[2023-11-01 20:24:08.200 -06:00 INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usuario/token application/json 58
+[2023-11-01 20:24:08.898 -06:00 INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '02/11/2023 02:15:26 a. m.', Current time: '02/11/2023 02:24:08 a. m.'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+[2023-11-01 20:24:09.002 -06:00 INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '02/11/2023 02:15:26 a. m.', Current time: '02/11/2023 02:24:08 a. m.'.
+[2023-11-01 20:24:09.006 -06:00 INF] Executing endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-11-01 20:24:09.039 -06:00 INF] Route matched with {action = "GetToken", controller = "Usuario"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTokenAsync(API.Dtos.LoginDto) on controller API.Controllers.UsuarioController (API).
+[2023-11-01 20:24:09.271 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 20:24:09.984 -06:00 WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+[2023-11-01 20:24:10.115 -06:00 INF] Executed DbCommand (47ms) [Parameters=[@__ToLower_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`ID`, `t`.`Apellido`, `t`.`CorreoElectronico`, `t`.`Nom_user`, `t`.`Password`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`, `t0`.`Nombre`, `r0`.`ID`, `r0`.`Created`, `r0`.`Expires`, `r0`.`Revoked`, `r0`.`Token`, `r0`.`UsuarioId`
+FROM (
+    SELECT `u`.`ID`, `u`.`Apellido`, `u`.`CorreoElectronico`, `u`.`Nom_user`, `u`.`Password`
+    FROM `Usuario` AS `u`
+    WHERE LOWER(`u`.`Nom_user`) = @__ToLower_0
+    LIMIT 1
+) AS `t`
+LEFT JOIN (
+    SELECT `u0`.`UsuarioId`, `u0`.`RolId`, `r`.`ID`, `r`.`Nombre`
+    FROM `UsuarioRoles` AS `u0`
+    INNER JOIN `Rol` AS `r` ON `u0`.`RolId` = `r`.`ID`
+) AS `t0` ON `t`.`ID` = `t0`.`UsuarioId`
+LEFT JOIN `RefreshToken` AS `r0` ON `t`.`ID` = `r0`.`UsuarioId`
+ORDER BY `t`.`ID`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`
+[2023-11-01 20:24:10.279 -06:00 INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[API.Dtos.DatosUsuarioDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-11-01 20:24:10.307 -06:00 INF] Executed action API.Controllers.UsuarioController.GetTokenAsync (API) in 1263.2095ms
+[2023-11-01 20:24:10.308 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-11-01 20:24:10.315 -06:00 INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usuario/token application/json 58 - 200 - application/json;+charset=utf-8 2118.6261ms
+[2023-11-01 20:24:28.748 -06:00 INF] Request starting HTTP/1.1 POST http://localhost:5000/api/producto/detalle application/json 16
+[2023-11-01 20:24:28.781 -06:00 INF] Executing endpoint 'API.Controllers.ProductoController.PostOCDetalle (API)'
+[2023-11-01 20:24:28.786 -06:00 INF] Route matched with {action = "PostOCDetalle", controller = "Producto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Core.Entities.Personalizadas.InformacionProducto]] PostOCDetalle(Core.Entities.Personalizadas.InformacionProducto) on controller API.Controllers.ProductoController (API).
+[2023-11-01 20:24:28.853 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 20:24:28.891 -06:00 INF] Executed DbCommand (6ms) [Parameters=[@__idProducto_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`Nom_prod` AS `NomProd`, `p`.`Categoria`, `p`.`Desc_prod` AS `DescProd`, CONCAT(CONCAT(CAST(`p`.`Cve_prov` AS char), ' - '), `c`.`NombreEmpresa`) AS `NombEmpresa`, `p`.`Precio`, `p`.`Stock`, CONCAT(CONCAT(CAST(`p`.`Estatus` AS char), ' - '), COALESCE(`e`.`Estatus`, '')) AS `Estatus`, `p`.`ID`
+FROM `Producto` AS `p`
+INNER JOIN `Cte_prov` AS `c` ON `p`.`Cve_prov` = `c`.`ID`
+INNER JOIN `Estatus` AS `e` ON `p`.`Estatus` = `e`.`ID`
+WHERE `p`.`ID` = @__idProducto_0
+LIMIT 1
+[2023-11-01 20:24:28.908 -06:00 INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[Core.Entities.Personalizadas.InformacionProducto, Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-11-01 20:24:28.916 -06:00 INF] Executed action API.Controllers.ProductoController.PostOCDetalle (API) in 129.7397ms
+[2023-11-01 20:24:28.916 -06:00 INF] Executed endpoint 'API.Controllers.ProductoController.PostOCDetalle (API)'
+[2023-11-01 20:24:28.917 -06:00 INF] Request finished HTTP/1.1 POST http://localhost:5000/api/producto/detalle application/json 16 - 200 - application/json;+charset=utf-8 168.7442ms
+[2023-11-01 20:28:00.541 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 20:28:01.117 -06:00 INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-11-01 20:28:01.189 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-11-01 20:28:01.218 -06:00 INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+[2023-11-01 20:28:01.238 -06:00 INF] No migrations were applied. The database is already up to date.
+[2023-11-01 20:28:01.433 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Rol` AS `r`)
+[2023-11-01 20:28:01.673 -06:00 INF] User profile is available. Using 'C:\Users\Rodrigo Tellez\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2023-11-01 20:28:01.759 -06:00 INF] Now listening on: https://localhost:5001
+[2023-11-01 20:28:01.759 -06:00 INF] Now listening on: http://localhost:5000
+[2023-11-01 20:28:01.765 -06:00 INF] Application started. Press Ctrl+C to shut down.
+[2023-11-01 20:28:01.765 -06:00 INF] Hosting environment: Development
+[2023-11-01 20:28:01.765 -06:00 INF] Content root path: D:\10CUATRIMESTRE\HECTOR\Backend\inventario\API\
+[2023-11-01 20:28:21.561 -06:00 INF] Request starting HTTP/1.1 POST http://localhost:5000/api/producto/detalle application/json 16
+[2023-11-01 20:28:22.022 -06:00 INF] Executing endpoint 'API.Controllers.ProductoController.PostOCDetalle (API)'
+[2023-11-01 20:28:22.047 -06:00 INF] Route matched with {action = "PostOCDetalle", controller = "Producto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Core.Entities.Personalizadas.InformacionProducto]] PostOCDetalle(Core.Entities.Personalizadas.InformacionProducto) on controller API.Controllers.ProductoController (API).
+[2023-11-01 20:28:22.200 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 20:28:22.347 -06:00 INF] Executed DbCommand (34ms) [Parameters=[@__idProducto_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`Nom_prod` AS `NomProd`, `p`.`Categoria`, `p`.`Desc_prod` AS `DescProd`, CONCAT(CONCAT(CAST(`p`.`Cve_prov` AS char), ' - '), `c`.`NombreEmpresa`) AS `NombEmpresa`, `p`.`Precio`, `p`.`Stock`, CONCAT(CONCAT(CAST(`p`.`Estatus` AS char), ' - '), COALESCE(`e`.`Estatus`, '')) AS `Estatus`, `c`.`Contacto` AS `NombProv`, `c`.`CorreoElectronico` AS `EmailProv`, `c`.`Telefono` AS `TelefonoProv`, `p`.`ID`
+FROM `Producto` AS `p`
+INNER JOIN `Cte_prov` AS `c` ON `p`.`Cve_prov` = `c`.`ID`
+INNER JOIN `Estatus` AS `e` ON `p`.`Estatus` = `e`.`ID`
+WHERE `p`.`ID` = @__idProducto_0
+LIMIT 1
+[2023-11-01 20:28:22.371 -06:00 INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[Core.Entities.Personalizadas.InformacionProducto, Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-11-01 20:28:22.391 -06:00 INF] Executed action API.Controllers.ProductoController.PostOCDetalle (API) in 338.4168ms
+[2023-11-01 20:28:22.391 -06:00 INF] Executed endpoint 'API.Controllers.ProductoController.PostOCDetalle (API)'
+[2023-11-01 20:28:22.400 -06:00 INF] Request finished HTTP/1.1 POST http://localhost:5000/api/producto/detalle application/json 16 - 200 - application/json;+charset=utf-8 842.1513ms
+[2023-11-01 20:28:49.044 -06:00 INF] Request starting HTTP/1.1 GET http://localhost:5000/api/escasez/all?pageSize=3&pageIndex=1&search= - -
+[2023-11-01 20:28:49.058 -06:00 INF] Executing endpoint 'API.Controllers.EscasezController.GetEscasez (API)'
+[2023-11-01 20:28:49.066 -06:00 INF] Route matched with {action = "GetEscasez", controller = "Escasez"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[API.Helpers.Pager`1[Core.Entities.Personalizadas.InformacionEscasez]]] GetEscasez(API.Helpers.Params) on controller API.Controllers.EscasezController (API).
+[2023-11-01 20:28:49.125 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 20:28:49.228 -06:00 INF] Executed DbCommand (78ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Escasez_Producto` AS `e`
+INNER JOIN `Producto` AS `p` ON `e`.`ProductoId` = `p`.`ID`
+INNER JOIN `Usuario` AS `u` ON `e`.`UsuarioId` = `u`.`ID`
+[2023-11-01 20:28:49.273 -06:00 WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+[2023-11-01 20:28:49.274 -06:00 WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+[2023-11-01 20:28:49.286 -06:00 INF] Executed DbCommand (2ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `e`.`ID`, `e`.`Estatus`, `e`.`Cant_Soli`, `e`.`Fecha_Registro`, `p`.`Nom_prod` AS `Nom_Producto`, `u`.`Apellido` AS `Nom_Usuario`, `e`.`Precio`
+FROM `Escasez_Producto` AS `e`
+INNER JOIN `Producto` AS `p` ON `e`.`ProductoId` = `p`.`ID`
+INNER JOIN `Usuario` AS `u` ON `e`.`UsuarioId` = `u`.`ID`
+LIMIT @__p_1 OFFSET @__p_0
+[2023-11-01 20:28:49.302 -06:00 INF] Executing ObjectResult, writing value of type 'API.Helpers.Pager`1[[Core.Entities.Personalizadas.InformacionEscasez, Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-11-01 20:28:49.312 -06:00 INF] Executed action API.Controllers.EscasezController.GetEscasez (API) in 246.5649ms
+[2023-11-01 20:28:49.313 -06:00 INF] Executed endpoint 'API.Controllers.EscasezController.GetEscasez (API)'
+[2023-11-01 20:28:49.313 -06:00 INF] Request finished HTTP/1.1 GET http://localhost:5000/api/escasez/all?pageSize=3&pageIndex=1&search= - - - 200 - application/json;+charset=utf-8 268.8771ms
+[2023-11-01 20:34:29.760 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 20:34:30.340 -06:00 INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-11-01 20:34:30.389 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-11-01 20:34:30.422 -06:00 INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+[2023-11-01 20:34:30.446 -06:00 INF] No migrations were applied. The database is already up to date.
+[2023-11-01 20:34:30.721 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Rol` AS `r`)
+[2023-11-01 20:34:30.903 -06:00 INF] User profile is available. Using 'C:\Users\Rodrigo Tellez\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2023-11-01 20:34:31.060 -06:00 INF] Now listening on: https://localhost:5001
+[2023-11-01 20:34:31.060 -06:00 INF] Now listening on: http://localhost:5000
+[2023-11-01 20:34:31.066 -06:00 INF] Application started. Press Ctrl+C to shut down.
+[2023-11-01 20:34:31.066 -06:00 INF] Hosting environment: Development
+[2023-11-01 20:34:31.067 -06:00 INF] Content root path: D:\10CUATRIMESTRE\HECTOR\Backend\inventario\API\
+[2023-11-01 20:34:36.273 -06:00 INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usuario/token application/json 58
+[2023-11-01 20:34:36.545 -06:00 INF] Executing endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-11-01 20:34:36.568 -06:00 INF] Route matched with {action = "GetToken", controller = "Usuario"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTokenAsync(API.Dtos.LoginDto) on controller API.Controllers.UsuarioController (API).
+[2023-11-01 20:34:36.751 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 20:34:36.996 -06:00 WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+[2023-11-01 20:34:37.083 -06:00 INF] Executed DbCommand (29ms) [Parameters=[@__ToLower_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`ID`, `t`.`Apellido`, `t`.`CorreoElectronico`, `t`.`Nom_user`, `t`.`Password`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`, `t0`.`Nombre`, `r0`.`ID`, `r0`.`Created`, `r0`.`Expires`, `r0`.`Revoked`, `r0`.`Token`, `r0`.`UsuarioId`
+FROM (
+    SELECT `u`.`ID`, `u`.`Apellido`, `u`.`CorreoElectronico`, `u`.`Nom_user`, `u`.`Password`
+    FROM `Usuario` AS `u`
+    WHERE LOWER(`u`.`Nom_user`) = @__ToLower_0
+    LIMIT 1
+) AS `t`
+LEFT JOIN (
+    SELECT `u0`.`UsuarioId`, `u0`.`RolId`, `r`.`ID`, `r`.`Nombre`
+    FROM `UsuarioRoles` AS `u0`
+    INNER JOIN `Rol` AS `r` ON `u0`.`RolId` = `r`.`ID`
+) AS `t0` ON `t`.`ID` = `t0`.`UsuarioId`
+LEFT JOIN `RefreshToken` AS `r0` ON `t`.`ID` = `r0`.`UsuarioId`
+ORDER BY `t`.`ID`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`
+[2023-11-01 20:34:37.226 -06:00 INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[API.Dtos.DatosUsuarioDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-11-01 20:34:37.252 -06:00 INF] Executed action API.Controllers.UsuarioController.GetTokenAsync (API) in 678.3792ms
+[2023-11-01 20:34:37.252 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-11-01 20:34:37.259 -06:00 INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usuario/token application/json 58 - 200 - application/json;+charset=utf-8 989.7692ms
+[2023-11-01 20:44:49.388 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 20:44:49.892 -06:00 INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-11-01 20:44:49.969 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-11-01 20:44:50.003 -06:00 INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+[2023-11-01 20:44:50.024 -06:00 INF] No migrations were applied. The database is already up to date.
+[2023-11-01 20:44:50.267 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Rol` AS `r`)
+[2023-11-01 20:44:50.413 -06:00 INF] User profile is available. Using 'C:\Users\Rodrigo Tellez\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2023-11-01 20:44:50.503 -06:00 INF] Now listening on: https://localhost:5001
+[2023-11-01 20:44:50.503 -06:00 INF] Now listening on: http://localhost:5000
+[2023-11-01 20:44:50.508 -06:00 INF] Application started. Press Ctrl+C to shut down.
+[2023-11-01 20:44:50.508 -06:00 INF] Hosting environment: Development
+[2023-11-01 20:44:50.508 -06:00 INF] Content root path: D:\10CUATRIMESTRE\HECTOR\Backend\inventario\API\
+[2023-11-01 20:44:56.341 -06:00 INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usuario/token application/json 58
+[2023-11-01 20:44:56.807 -06:00 INF] Executing endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-11-01 20:44:56.836 -06:00 INF] Route matched with {action = "GetToken", controller = "Usuario"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTokenAsync(API.Dtos.LoginDto) on controller API.Controllers.UsuarioController (API).
+[2023-11-01 20:44:57.028 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 20:44:57.321 -06:00 WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+[2023-11-01 20:44:57.437 -06:00 INF] Executed DbCommand (31ms) [Parameters=[@__ToLower_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`ID`, `t`.`Apellido`, `t`.`CorreoElectronico`, `t`.`Nom_user`, `t`.`Password`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`, `t0`.`Nombre`, `r0`.`ID`, `r0`.`Created`, `r0`.`Expires`, `r0`.`Revoked`, `r0`.`Token`, `r0`.`UsuarioId`
+FROM (
+    SELECT `u`.`ID`, `u`.`Apellido`, `u`.`CorreoElectronico`, `u`.`Nom_user`, `u`.`Password`
+    FROM `Usuario` AS `u`
+    WHERE LOWER(`u`.`Nom_user`) = @__ToLower_0
+    LIMIT 1
+) AS `t`
+LEFT JOIN (
+    SELECT `u0`.`UsuarioId`, `u0`.`RolId`, `r`.`ID`, `r`.`Nombre`
+    FROM `UsuarioRoles` AS `u0`
+    INNER JOIN `Rol` AS `r` ON `u0`.`RolId` = `r`.`ID`
+) AS `t0` ON `t`.`ID` = `t0`.`UsuarioId`
+LEFT JOIN `RefreshToken` AS `r0` ON `t`.`ID` = `r0`.`UsuarioId`
+ORDER BY `t`.`ID`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`
+[2023-11-01 20:44:57.648 -06:00 INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[API.Dtos.DatosUsuarioDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-11-01 20:44:57.682 -06:00 INF] Executed action API.Controllers.UsuarioController.GetTokenAsync (API) in 839.8362ms
+[2023-11-01 20:44:57.683 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-11-01 20:44:57.689 -06:00 INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usuario/token application/json 58 - 200 - application/json;+charset=utf-8 1351.5788ms
+[2023-11-01 20:45:06.507 -06:00 INF] Request starting HTTP/1.1 GET http://localhost:5000/api/escasez/all?pageSize=3&pageIndex=1&search= - -
+[2023-11-01 20:45:06.521 -06:00 INF] Executing endpoint 'API.Controllers.EscasezController.GetEscasez (API)'
+[2023-11-01 20:45:06.528 -06:00 INF] Route matched with {action = "GetEscasez", controller = "Escasez"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[API.Helpers.Pager`1[Core.Entities.Personalizadas.InformacionEscasez]]] GetEscasez(API.Helpers.Params) on controller API.Controllers.EscasezController (API).
+[2023-11-01 20:45:06.696 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 20:45:06.722 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Escasez_Producto` AS `e`
+INNER JOIN `Producto` AS `p` ON `e`.`ProductoId` = `p`.`ID`
+INNER JOIN `Usuario` AS `u` ON `e`.`UsuarioId` = `u`.`ID`
+INNER JOIN `Estatus` AS `e0` ON `e`.`Estatus` = `e0`.`ID`
+[2023-11-01 20:45:06.736 -06:00 WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+[2023-11-01 20:45:06.737 -06:00 WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+[2023-11-01 20:45:06.755 -06:00 INF] Executed DbCommand (5ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `e`.`ID`, CONCAT(CONCAT(COALESCE(CAST(`e`.`Estatus` AS char), ''), ' - '), COALESCE(`e0`.`Estatus`, '')) AS `Estatus`, `e`.`Cant_Soli`, `e`.`Fecha_Registro`, `p`.`Nom_prod` AS `Nom_Producto`, `u`.`Apellido` AS `Nom_Usuario`, `e`.`Precio`
+FROM `Escasez_Producto` AS `e`
+INNER JOIN `Producto` AS `p` ON `e`.`ProductoId` = `p`.`ID`
+INNER JOIN `Usuario` AS `u` ON `e`.`UsuarioId` = `u`.`ID`
+INNER JOIN `Estatus` AS `e0` ON `e`.`Estatus` = `e0`.`ID`
+LIMIT @__p_1 OFFSET @__p_0
+[2023-11-01 20:45:06.775 -06:00 INF] Executing ObjectResult, writing value of type 'API.Helpers.Pager`1[[Core.Entities.Personalizadas.InformacionEscasez, Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-11-01 20:45:06.783 -06:00 INF] Executed action API.Controllers.EscasezController.GetEscasez (API) in 254.7621ms
+[2023-11-01 20:45:06.783 -06:00 INF] Executed endpoint 'API.Controllers.EscasezController.GetEscasez (API)'
+[2023-11-01 20:45:06.783 -06:00 INF] Request finished HTTP/1.1 GET http://localhost:5000/api/escasez/all?pageSize=3&pageIndex=1&search= - - - 200 - application/json;+charset=utf-8 276.9040ms
+[2023-11-01 20:45:37.926 -06:00 INF] Request starting HTTP/1.1 POST https://localhost:5001/api/escasez application/json 88
+[2023-11-01 20:45:37.932 -06:00 INF] Executing endpoint 'API.Controllers.EscasezController.PostProcesoEscasez (API)'
+[2023-11-01 20:45:37.937 -06:00 INF] Route matched with {action = "PostProcesoEscasez", controller = "Escasez"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] PostProcesoEscasez(API.Dtos.PendienteAutorizarDto) on controller API.Controllers.EscasezController (API).
+[2023-11-01 20:45:37.950 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 20:45:37.991 -06:00 INF] Executed DbCommand (3ms) [Parameters=[@__idProducto_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`Stock`
+FROM `Producto` AS `p`
+WHERE `p`.`ID` = @__idProducto_0
+LIMIT 1
+[2023-11-01 20:45:38.004 -06:00 INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+UPDATE Producto
+                                                                SET Estatus = @p0
+                                                                WHERE ID = @p1
+[2023-11-01 20:45:38.020 -06:00 INF] Executed DbCommand (4ms) [Parameters=[@__idProducto_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`Precio`
+FROM `Producto` AS `p`
+WHERE `p`.`ID` = @__idProducto_0
+LIMIT 1
+[2023-11-01 20:45:38.027 -06:00 INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = DateTime), @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+
+                                    INSERT INTO Escasez_Producto
+                                    (
+                                    ProductoId,
+                                    Cant_Soli,
+                                    Fecha_registro,
+                                    UsuarioId,
+                                    Estatus,
+                                    Precio)
+                                    VALUES
+                                    (@p0,@p1,@p2,@p3,@p4,@p5)
+[2023-11-01 20:45:38.050 -06:00 INF] Executing OkObjectResult, writing value of type 'API.Helpers.Errors.ManagementResponse'.
+[2023-11-01 20:45:38.051 -06:00 INF] Executed action API.Controllers.EscasezController.PostProcesoEscasez (API) in 114.176ms
+[2023-11-01 20:45:38.052 -06:00 INF] Executed endpoint 'API.Controllers.EscasezController.PostProcesoEscasez (API)'
+[2023-11-01 20:45:38.052 -06:00 INF] Request finished HTTP/1.1 POST https://localhost:5001/api/escasez application/json 88 - 200 - application/json;+charset=utf-8 125.5904ms
+[2023-11-01 21:13:01.638 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 21:13:02.124 -06:00 INF] Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-11-01 21:13:02.157 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-11-01 21:13:02.188 -06:00 INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+[2023-11-01 21:13:02.206 -06:00 INF] No migrations were applied. The database is already up to date.
+[2023-11-01 21:13:02.414 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Rol` AS `r`)
+[2023-11-01 21:13:02.534 -06:00 INF] User profile is available. Using 'C:\Users\Rodrigo Tellez\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2023-11-01 21:13:02.648 -06:00 INF] Now listening on: https://localhost:5001
+[2023-11-01 21:13:02.648 -06:00 INF] Now listening on: http://localhost:5000
+[2023-11-01 21:13:02.653 -06:00 INF] Application started. Press Ctrl+C to shut down.
+[2023-11-01 21:13:02.653 -06:00 INF] Hosting environment: Development
+[2023-11-01 21:13:02.653 -06:00 INF] Content root path: D:\10CUATRIMESTRE\HECTOR\Backend\inventario\API\
+[2023-11-01 21:13:13.567 -06:00 INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usuario/token application/json 58
+[2023-11-01 21:13:14.473 -06:00 INF] Executing endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-11-01 21:13:14.501 -06:00 INF] Route matched with {action = "GetToken", controller = "Usuario"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTokenAsync(API.Dtos.LoginDto) on controller API.Controllers.UsuarioController (API).
+[2023-11-01 21:13:15.016 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 21:13:16.011 -06:00 WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+[2023-11-01 21:13:16.185 -06:00 INF] Executed DbCommand (39ms) [Parameters=[@__ToLower_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`ID`, `t`.`Apellido`, `t`.`CorreoElectronico`, `t`.`Nom_user`, `t`.`Password`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`, `t0`.`Nombre`, `r0`.`ID`, `r0`.`Created`, `r0`.`Expires`, `r0`.`Revoked`, `r0`.`Token`, `r0`.`UsuarioId`
+FROM (
+    SELECT `u`.`ID`, `u`.`Apellido`, `u`.`CorreoElectronico`, `u`.`Nom_user`, `u`.`Password`
+    FROM `Usuario` AS `u`
+    WHERE LOWER(`u`.`Nom_user`) = @__ToLower_0
+    LIMIT 1
+) AS `t`
+LEFT JOIN (
+    SELECT `u0`.`UsuarioId`, `u0`.`RolId`, `r`.`ID`, `r`.`Nombre`
+    FROM `UsuarioRoles` AS `u0`
+    INNER JOIN `Rol` AS `r` ON `u0`.`RolId` = `r`.`ID`
+) AS `t0` ON `t`.`ID` = `t0`.`UsuarioId`
+LEFT JOIN `RefreshToken` AS `r0` ON `t`.`ID` = `r0`.`UsuarioId`
+ORDER BY `t`.`ID`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`
+[2023-11-01 21:13:16.435 -06:00 INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[API.Dtos.DatosUsuarioDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-11-01 21:13:16.474 -06:00 INF] Executed action API.Controllers.UsuarioController.GetTokenAsync (API) in 1964.7116ms
+[2023-11-01 21:13:16.475 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-11-01 21:13:16.479 -06:00 INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usuario/token application/json 58 - 200 - application/json;+charset=utf-8 2916.9439ms
+[2023-11-01 21:13:45.345 -06:00 INF] Request starting HTTP/1.1 POST http://localhost:5000/api/escasez/detalle application/json 16
+[2023-11-01 21:13:45.357 -06:00 INF] Executing endpoint 'API.Controllers.EscasezController.PostDetalle (API)'
+[2023-11-01 21:13:45.362 -06:00 INF] Route matched with {action = "PostDetalle", controller = "Escasez"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Core.Entities.Personalizadas.DetalleEscasez]] PostDetalle(Core.Entities.Personalizadas.DetalleEscasez) on controller API.Controllers.EscasezController (API).
+[2023-11-01 21:13:45.443 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-11-01 21:13:45.480 -06:00 INF] Executed DbCommand (6ms) [Parameters=[@__idEscasez_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `e`.`ID`, CONCAT(CONCAT(COALESCE(CAST(`e`.`Estatus` AS char), ''), ' - '), COALESCE(`e0`.`Estatus`, '')) AS `Estatus`, `e`.`Cant_Soli`, `e`.`Fecha_Registro`, `p`.`Nom_prod` AS `Nom_Producto`, `u`.`Apellido` AS `Nom_Usuario`, `e`.`Precio`, `u`.`CorreoElectronico` AS `Correo_Usuario`, `c`.`CorreoElectronico` AS `Email_Prov`, `c`.`Contacto` AS `Nomb_Prov`, `c`.`Telefono` AS `Telefono_Prov`, `c`.`NombreEmpresa` AS `Nomb_Empresa`
+FROM `Escasez_Producto` AS `e`
+INNER JOIN `Producto` AS `p` ON `e`.`ProductoId` = `p`.`ID`
+INNER JOIN `Usuario` AS `u` ON `e`.`UsuarioId` = `u`.`ID`
+INNER JOIN `Estatus` AS `e0` ON `e`.`Estatus` = `e0`.`ID`
+INNER JOIN `Cte_prov` AS `c` ON `p`.`ID` = `c`.`ID`
+WHERE `e`.`ID` = @__idEscasez_0
+LIMIT 1
+[2023-11-01 21:13:45.492 -06:00 INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[Core.Entities.Personalizadas.DetalleEscasez, Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-11-01 21:13:45.497 -06:00 INF] Executed action API.Controllers.EscasezController.PostDetalle (API) in 134.9709ms
+[2023-11-01 21:13:45.497 -06:00 INF] Executed endpoint 'API.Controllers.EscasezController.PostDetalle (API)'
+[2023-11-01 21:13:45.498 -06:00 INF] Request finished HTTP/1.1 POST http://localhost:5000/api/escasez/detalle application/json 16 - 200 - application/json;+charset=utf-8 153.4074ms

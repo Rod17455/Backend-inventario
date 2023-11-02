@@ -69,4 +69,37 @@ public class EscasezController : BaseApiController
             return BadRequest(new ApiResponse(500));
         }
     }
+
+    //INFORMACIÓN DE UN PRODUCTO
+    [HttpPost("detalle")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult<DetalleEscasez>> PostDetalle(DetalleEscasez detail)
+    {
+
+        try
+        {
+            var _detalle = await _unitOfWork.Escasezes.DetalleEscasez(detail.ID);
+
+            if (_detalle == null)
+            {
+                return NotFound(new ApiResponse(404));
+            }
+
+            var response = new
+            {
+                Success = true,
+                Data = _mapper.Map<DetalleEscasez>(_detalle)
+            };
+
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("ERROR EN EL ENDPOINT DE DETALLE DE ESCASEZ " + ex.Message);
+            return BadRequest(new ApiResponse(500));
+        }
+    }
 }

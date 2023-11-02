@@ -14,4 +14,5 @@ public class InformacionEscasez : BaseEntity
     public string? Nom_Usuario { get; set; }
     public string? Estatus { get; set; }
     public decimal? Precio { get; set; }
+
 }

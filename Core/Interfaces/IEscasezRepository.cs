@@ -14,6 +14,9 @@ public interface IEscasezRepository : IGenericRepository<InformacionEscasez>
     Task<decimal> ObtenerPrecioProducto(int idProducto);
     Task<int> ActualizarEstatusProductoPendiente(int idProducto);
     Task<int> InsertarEscasez(EscasezProducto escasezProducto);
+    Task<int> ActualizarEstatusProducto(int idProducto, int estatus);
+    Task<int> ActualizarEstatusEscasez(int idEscasez, int estatus);
+    Task<int> InsertarEscasez(Autorizacion autorizacion);
 
 
 }

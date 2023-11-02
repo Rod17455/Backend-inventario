@@ -28,7 +28,7 @@ public class EscasezProductoConfiguration : IEntityTypeConfiguration<EscasezProd
                 .IsRequired()
                 .HasColumnName("UsuarioId");
         builder.Property(e => e.Estatus)
-            .HasMaxLength(20)
+            .HasColumnType("int")
             .HasColumnName("Estatus");
         builder.Property(e => e.Precio).HasPrecision(10, 2);
 

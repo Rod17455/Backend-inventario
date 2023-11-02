@@ -67,3 +67,263 @@ ORDER BY `t`.`ID`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`
 [2023-10-29 11:56:41.813 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
 [2023-10-29 11:56:41.813 -06:00 INF] Request finished HTTP/1.1 POST http://192.168.108.1:5000/api/usuario/token application/json 44 - 200 - application/json;+charset=utf-8 286.1804ms
 [2023-10-29 11:58:00.406 -06:00 INF] Application is shutting down...
+[2023-10-29 17:45:41.772 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-29 17:45:42.197 -06:00 INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-10-29 17:45:42.237 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-10-29 17:45:42.313 -06:00 INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+[2023-10-29 17:45:42.342 -06:00 INF] No migrations were applied. The database is already up to date.
+[2023-10-29 17:45:42.605 -06:00 INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Rol` AS `r`)
+[2023-10-29 17:45:42.727 -06:00 INF] User profile is available. Using 'C:\Users\Rodrigo Tellez\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2023-10-29 17:45:42.832 -06:00 INF] Now listening on: https://192.168.108.1:5001
+[2023-10-29 17:45:42.832 -06:00 INF] Now listening on: http://192.168.108.1:5000
+[2023-10-29 17:45:42.836 -06:00 INF] Application started. Press Ctrl+C to shut down.
+[2023-10-29 17:45:42.836 -06:00 INF] Hosting environment: Development
+[2023-10-29 17:45:42.836 -06:00 INF] Content root path: D:\10CUATRIMESTRE\HECTOR\Backend\inventario\API\
+[2023-10-29 17:45:56.672 -06:00 INF] Request starting HTTP/1.1 POST http://192.168.108.1:5000/api/usuario/token application/json 58
+[2023-10-29 17:45:59.300 -06:00 INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '29/10/2023 12:09:11 a. m.', Current time: '29/10/2023 11:45:59 p. m.'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+[2023-10-29 17:45:59.486 -06:00 INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '29/10/2023 12:09:11 a. m.', Current time: '29/10/2023 11:45:59 p. m.'.
+[2023-10-29 17:45:59.492 -06:00 INF] Executing endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-10-29 17:45:59.522 -06:00 INF] Route matched with {action = "GetToken", controller = "Usuario"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTokenAsync(API.Dtos.LoginDto) on controller API.Controllers.UsuarioController (API).
+[2023-10-29 17:45:59.751 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-29 17:46:00.247 -06:00 WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+[2023-10-29 17:46:00.441 -06:00 INF] Executed DbCommand (38ms) [Parameters=[@__ToLower_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`ID`, `t`.`Apellido`, `t`.`CorreoElectronico`, `t`.`Nom_user`, `t`.`Password`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`, `t0`.`Nombre`, `r0`.`ID`, `r0`.`Created`, `r0`.`Expires`, `r0`.`Revoked`, `r0`.`Token`, `r0`.`UsuarioId`
+FROM (
+    SELECT `u`.`ID`, `u`.`Apellido`, `u`.`CorreoElectronico`, `u`.`Nom_user`, `u`.`Password`
+    FROM `Usuario` AS `u`
+    WHERE LOWER(`u`.`Nom_user`) = @__ToLower_0
+    LIMIT 1
+) AS `t`
+LEFT JOIN (
+    SELECT `u0`.`UsuarioId`, `u0`.`RolId`, `r`.`ID`, `r`.`Nombre`
+    FROM `UsuarioRoles` AS `u0`
+    INNER JOIN `Rol` AS `r` ON `u0`.`RolId` = `r`.`ID`
+) AS `t0` ON `t`.`ID` = `t0`.`UsuarioId`
+LEFT JOIN `RefreshToken` AS `r0` ON `t`.`ID` = `r0`.`UsuarioId`
+ORDER BY `t`.`ID`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`
+[2023-10-29 17:46:00.661 -06:00 INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[API.Dtos.DatosUsuarioDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-10-29 17:46:00.690 -06:00 INF] Executed action API.Controllers.UsuarioController.GetTokenAsync (API) in 1162.8126ms
+[2023-10-29 17:46:00.691 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-10-29 17:46:00.696 -06:00 INF] Request finished HTTP/1.1 POST http://192.168.108.1:5000/api/usuario/token application/json 58 - 200 - application/json;+charset=utf-8 4029.7511ms
+[2023-10-29 17:46:12.052 -06:00 INF] Request starting HTTP/1.1 GET http://192.168.108.1:5000/api/producto?pageSize=3&pageIndex=1&search= - -
+[2023-10-29 17:46:12.111 -06:00 INF] Executing endpoint 'API.Controllers.ProductoController.GetProducto (API)'
+[2023-10-29 17:46:12.118 -06:00 INF] Route matched with {action = "GetProducto", controller = "Producto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[API.Helpers.Pager`1[API.Dtos.ProductoDto]]] GetProducto(API.Helpers.Params) on controller API.Controllers.ProductoController (API).
+[2023-10-29 17:46:13.184 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-29 17:46:13.226 -06:00 INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Producto` AS `p`
+WHERE `p`.`Estatus` <> 4
+[2023-10-29 17:46:13.244 -06:00 WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+[2023-10-29 17:46:13.246 -06:00 WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+[2023-10-29 17:46:13.260 -06:00 INF] Executed DbCommand (5ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`ID`, `p`.`Categoria`, `p`.`Cve_prov`, `p`.`Desc_prod`, `p`.`Estatus`, `p`.`Nom_prod`, `p`.`Precio`, `p`.`Stock`
+FROM `Producto` AS `p`
+WHERE `p`.`Estatus` <> 4
+LIMIT @__p_1 OFFSET @__p_0
+[2023-10-29 17:46:13.320 -06:00 INF] Executing ObjectResult, writing value of type 'API.Helpers.Pager`1[[API.Dtos.ProductoDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-10-29 17:46:13.336 -06:00 INF] Executed action API.Controllers.ProductoController.GetProducto (API) in 1217.9882ms
+[2023-10-29 17:46:13.336 -06:00 INF] Executed endpoint 'API.Controllers.ProductoController.GetProducto (API)'
+[2023-10-29 17:46:13.337 -06:00 INF] Request finished HTTP/1.1 GET http://192.168.108.1:5000/api/producto?pageSize=3&pageIndex=1&search= - - - 200 - application/json;+charset=utf-8 1285.4893ms
+[2023-10-29 18:41:23.176 -06:00 INF] Request starting HTTP/1.1 POST http://192.168.108.1:5000/api/usuario/token application/json 44
+[2023-10-29 18:41:24.276 -06:00 INF] Executing endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-10-29 18:41:24.305 -06:00 INF] Route matched with {action = "GetToken", controller = "Usuario"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTokenAsync(API.Dtos.LoginDto) on controller API.Controllers.UsuarioController (API).
+[2023-10-29 18:41:25.254 -06:00 INF] Executed action API.Controllers.UsuarioController.GetTokenAsync (API) in 932.8675ms
+[2023-10-29 18:41:25.272 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-10-29 18:41:32.922 -06:00 INF] Request starting HTTP/1.1 POST http://192.168.108.1:5000/api/usuario/token application/json 44
+[2023-10-29 18:41:33.029 -06:00 INF] Executing endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-10-29 18:41:33.030 -06:00 INF] Route matched with {action = "GetToken", controller = "Usuario"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTokenAsync(API.Dtos.LoginDto) on controller API.Controllers.UsuarioController (API).
+[2023-10-29 18:41:33.288 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-29 18:41:33.727 -06:00 ERR] Unexpected end of request content.
+Microsoft.AspNetCore.Server.Kestrel.Core.BadHttpRequestException: Unexpected end of request content.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.Http1ContentLengthMessageBody.ReadAsyncInternal(CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpRequestStream.ReadAsyncInternal(Memory`1 destination, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.ReadFromStreamAsync(Stream utf8Json, ReadBufferState bufferState, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.ReadAllAsync[TValue](Stream utf8Json, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter.ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter.ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinder.BindModelAsync(ModelBindingContext bindingContext)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.ParameterBinder.BindModelAsync(ActionContext actionContext, IModelBinder modelBinder, IValueProvider valueProvider, ParameterDescriptor parameter, ModelMetadata metadata, Object value, Object container)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerBinderDelegateProvider.<>c__DisplayClass0_0.<<CreateBinderDelegate>g__Bind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at API.Helpers.Errors.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\10CUATRIMESTRE\HECTOR\Backend\inventario\API\Helpers\Errors\ExceptionMiddleware.cs:line 23
+[2023-10-29 18:41:33.896 -06:00 INF] Request finished HTTP/1.1 POST http://192.168.108.1:5000/api/usuario/token application/json 44 - 500 - application/json 10995.2739ms
+[2023-10-29 18:41:34.457 -06:00 INF] Executed DbCommand (44ms) [Parameters=[@__ToLower_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`ID`, `t`.`Apellido`, `t`.`CorreoElectronico`, `t`.`Nom_user`, `t`.`Password`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`, `t0`.`Nombre`, `r0`.`ID`, `r0`.`Created`, `r0`.`Expires`, `r0`.`Revoked`, `r0`.`Token`, `r0`.`UsuarioId`
+FROM (
+    SELECT `u`.`ID`, `u`.`Apellido`, `u`.`CorreoElectronico`, `u`.`Nom_user`, `u`.`Password`
+    FROM `Usuario` AS `u`
+    WHERE LOWER(`u`.`Nom_user`) = @__ToLower_0
+    LIMIT 1
+) AS `t`
+LEFT JOIN (
+    SELECT `u0`.`UsuarioId`, `u0`.`RolId`, `r`.`ID`, `r`.`Nombre`
+    FROM `UsuarioRoles` AS `u0`
+    INNER JOIN `Rol` AS `r` ON `u0`.`RolId` = `r`.`ID`
+) AS `t0` ON `t`.`ID` = `t0`.`UsuarioId`
+LEFT JOIN `RefreshToken` AS `r0` ON `t`.`ID` = `r0`.`UsuarioId`
+ORDER BY `t`.`ID`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`
+[2023-10-29 18:41:34.671 -06:00 INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[API.Dtos.DatosUsuarioDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-10-29 18:41:34.674 -06:00 INF] Executed action API.Controllers.UsuarioController.GetTokenAsync (API) in 1643.7606ms
+[2023-10-29 18:41:34.674 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-10-29 18:41:34.674 -06:00 INF] Request finished HTTP/1.1 POST http://192.168.108.1:5000/api/usuario/token application/json 44 - 200 - application/json;+charset=utf-8 1774.0211ms
+[2023-10-29 18:41:40.135 -06:00 INF] Request starting HTTP/1.1 GET http://192.168.108.1:5000/api/producto?pageSize=3&pageIndex=1&search= application/json -
+[2023-10-29 18:41:40.151 -06:00 INF] Executing endpoint 'API.Controllers.ProductoController.GetProducto (API)'
+[2023-10-29 18:41:40.151 -06:00 INF] Route matched with {action = "GetProducto", controller = "Producto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[API.Helpers.Pager`1[API.Dtos.ProductoDto]]] GetProducto(API.Helpers.Params) on controller API.Controllers.ProductoController (API).
+[2023-10-29 18:41:40.166 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-29 18:41:40.196 -06:00 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Producto` AS `p`
+WHERE `p`.`Estatus` <> 4
+[2023-10-29 18:41:40.235 -06:00 INF] Executed DbCommand (11ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`ID`, `p`.`Categoria`, `p`.`Cve_prov`, `p`.`Desc_prod`, `p`.`Estatus`, `p`.`Nom_prod`, `p`.`Precio`, `p`.`Stock`
+FROM `Producto` AS `p`
+WHERE `p`.`Estatus` <> 4
+LIMIT @__p_1 OFFSET @__p_0
+[2023-10-29 18:41:40.329 -06:00 INF] Executing ObjectResult, writing value of type 'API.Helpers.Pager`1[[API.Dtos.ProductoDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-10-29 18:41:40.329 -06:00 INF] Executed action API.Controllers.ProductoController.GetProducto (API) in 177.6093ms
+[2023-10-29 18:41:40.329 -06:00 INF] Executed endpoint 'API.Controllers.ProductoController.GetProducto (API)'
+[2023-10-29 18:41:40.330 -06:00 INF] Request finished HTTP/1.1 GET http://192.168.108.1:5000/api/producto?pageSize=3&pageIndex=1&search= application/json - - 200 - application/json;+charset=utf-8 194.2978ms
+[2023-10-29 18:43:14.692 -06:00 INF] Application is shutting down...
+[2023-10-29 18:45:06.360 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-29 18:45:06.991 -06:00 INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-10-29 18:45:07.071 -06:00 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='inventarioRopa' AND TABLE_NAME='__EFMigrationsHistory';
+[2023-10-29 18:45:07.103 -06:00 INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `MigrationId`, `ProductVersion`
+FROM `__EFMigrationsHistory`
+ORDER BY `MigrationId`;
+[2023-10-29 18:45:07.129 -06:00 INF] No migrations were applied. The database is already up to date.
+[2023-10-29 18:45:07.558 -06:00 INF] Executed DbCommand (202ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM `Rol` AS `r`)
+[2023-10-29 18:45:07.752 -06:00 INF] User profile is available. Using 'C:\Users\Rodrigo Tellez\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2023-10-29 18:45:08.122 -06:00 INF] Now listening on: https://192.168.108.1:5001
+[2023-10-29 18:45:08.122 -06:00 INF] Now listening on: http://192.168.108.1:5000
+[2023-10-29 18:45:08.127 -06:00 INF] Application started. Press Ctrl+C to shut down.
+[2023-10-29 18:45:08.128 -06:00 INF] Hosting environment: Development
+[2023-10-29 18:45:08.128 -06:00 INF] Content root path: D:\10CUATRIMESTRE\HECTOR\Backend\inventario\API\
+[2023-10-29 18:47:21.568 -06:00 INF] Request starting HTTP/1.1 POST http://192.168.108.1:5000/api/usuario/token application/json 44
+[2023-10-29 18:47:28.916 -06:00 INF] Executing endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-10-29 18:47:28.946 -06:00 INF] Route matched with {action = "GetToken", controller = "Usuario"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTokenAsync(API.Dtos.LoginDto) on controller API.Controllers.UsuarioController (API).
+[2023-10-29 18:47:29.324 -06:00 INF] Executed action API.Controllers.UsuarioController.GetTokenAsync (API) in 372.5299ms
+[2023-10-29 18:47:29.325 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-10-29 18:47:30.096 -06:00 ERR] Unexpected end of request content.
+Microsoft.AspNetCore.Server.Kestrel.Core.BadHttpRequestException: Unexpected end of request content.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.Http1ContentLengthMessageBody.ReadAsyncInternal(CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpRequestStream.ReadAsyncInternal(Memory`1 destination, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.ReadFromStreamAsync(Stream utf8Json, ReadBufferState bufferState, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.ReadAllAsync[TValue](Stream utf8Json, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter.ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter.ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinder.BindModelAsync(ModelBindingContext bindingContext)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.ParameterBinder.BindModelAsync(ActionContext actionContext, IModelBinder modelBinder, IValueProvider valueProvider, ParameterDescriptor parameter, ModelMetadata metadata, Object value, Object container)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerBinderDelegateProvider.<>c__DisplayClass0_0.<<CreateBinderDelegate>g__Bind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at API.Helpers.Errors.ExceptionMiddleware.InvokeAsync(HttpContext context) in D:\10CUATRIMESTRE\HECTOR\Backend\inventario\API\Helpers\Errors\ExceptionMiddleware.cs:line 23
+[2023-10-29 18:47:30.115 -06:00 INF] Request finished HTTP/1.1 POST http://192.168.108.1:5000/api/usuario/token application/json 44 - 500 - application/json 8550.7749ms
+[2023-10-29 18:47:35.116 -06:00 INF] Request starting HTTP/1.1 POST http://192.168.108.1:5000/api/usuario/token application/json 44
+[2023-10-29 18:47:35.121 -06:00 INF] Executing endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-10-29 18:47:35.122 -06:00 INF] Route matched with {action = "GetToken", controller = "Usuario"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTokenAsync(API.Dtos.LoginDto) on controller API.Controllers.UsuarioController (API).
+[2023-10-29 18:47:35.182 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-29 18:47:35.533 -06:00 WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+[2023-10-29 18:47:35.651 -06:00 INF] Executed DbCommand (29ms) [Parameters=[@__ToLower_0='?' (Size = 255)], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`ID`, `t`.`Apellido`, `t`.`CorreoElectronico`, `t`.`Nom_user`, `t`.`Password`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`, `t0`.`Nombre`, `r0`.`ID`, `r0`.`Created`, `r0`.`Expires`, `r0`.`Revoked`, `r0`.`Token`, `r0`.`UsuarioId`
+FROM (
+    SELECT `u`.`ID`, `u`.`Apellido`, `u`.`CorreoElectronico`, `u`.`Nom_user`, `u`.`Password`
+    FROM `Usuario` AS `u`
+    WHERE LOWER(`u`.`Nom_user`) = @__ToLower_0
+    LIMIT 1
+) AS `t`
+LEFT JOIN (
+    SELECT `u0`.`UsuarioId`, `u0`.`RolId`, `r`.`ID`, `r`.`Nombre`
+    FROM `UsuarioRoles` AS `u0`
+    INNER JOIN `Rol` AS `r` ON `u0`.`RolId` = `r`.`ID`
+) AS `t0` ON `t`.`ID` = `t0`.`UsuarioId`
+LEFT JOIN `RefreshToken` AS `r0` ON `t`.`ID` = `r0`.`UsuarioId`
+ORDER BY `t`.`ID`, `t0`.`UsuarioId`, `t0`.`RolId`, `t0`.`ID`
+[2023-10-29 18:47:36.197 -06:00 INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.String, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[API.Dtos.DatosUsuarioDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-10-29 18:47:36.216 -06:00 INF] Executed action API.Controllers.UsuarioController.GetTokenAsync (API) in 1094.01ms
+[2023-10-29 18:47:36.217 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-10-29 18:47:36.219 -06:00 INF] Request finished HTTP/1.1 POST http://192.168.108.1:5000/api/usuario/token application/json 44 - 200 - application/json;+charset=utf-8 1103.0920ms
+[2023-10-29 18:47:41.234 -06:00 INF] Request starting HTTP/1.1 GET http://192.168.108.1:5000/api/producto?pageSize=3&pageIndex=1&search= application/json -
+[2023-10-29 18:47:41.315 -06:00 INF] Executing endpoint 'API.Controllers.ProductoController.GetProducto (API)'
+[2023-10-29 18:47:41.321 -06:00 INF] Route matched with {action = "GetProducto", controller = "Producto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[API.Helpers.Pager`1[API.Dtos.ProductoDto]]] GetProducto(API.Helpers.Params) on controller API.Controllers.ProductoController (API).
+[2023-10-29 18:47:41.376 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-29 18:47:41.395 -06:00 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Producto` AS `p`
+WHERE `p`.`Estatus` <> 4
+[2023-10-29 18:47:41.463 -06:00 WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+[2023-10-29 18:47:41.464 -06:00 WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+[2023-10-29 18:47:41.478 -06:00 INF] Executed DbCommand (6ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`ID`, `p`.`Categoria`, `p`.`Cve_prov`, `p`.`Desc_prod`, `p`.`Estatus`, `p`.`Nom_prod`, `p`.`Precio`, `p`.`Stock`
+FROM `Producto` AS `p`
+WHERE `p`.`Estatus` <> 4
+LIMIT @__p_1 OFFSET @__p_0
+[2023-10-29 18:47:41.520 -06:00 INF] Executing ObjectResult, writing value of type 'API.Helpers.Pager`1[[API.Dtos.ProductoDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-10-29 18:47:41.532 -06:00 INF] Executed action API.Controllers.ProductoController.GetProducto (API) in 210.4085ms
+[2023-10-29 18:47:41.532 -06:00 INF] Executed endpoint 'API.Controllers.ProductoController.GetProducto (API)'
+[2023-10-29 18:47:41.533 -06:00 INF] Request finished HTTP/1.1 GET http://192.168.108.1:5000/api/producto?pageSize=3&pageIndex=1&search= application/json - - 200 - application/json;+charset=utf-8 298.5042ms
+[2023-10-29 18:48:12.930 -06:00 INF] Request starting HTTP/1.1 GET http://192.168.108.1:5000/api/producto?pageSize=3&pageIndex=1&search= application/json -
+[2023-10-29 18:48:12.936 -06:00 INF] Executing endpoint 'API.Controllers.ProductoController.GetProducto (API)'
+[2023-10-29 18:48:12.937 -06:00 INF] Route matched with {action = "GetProducto", controller = "Producto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[API.Helpers.Pager`1[API.Dtos.ProductoDto]]] GetProducto(API.Helpers.Params) on controller API.Controllers.ProductoController (API).
+[2023-10-29 18:48:12.939 -06:00 INF] Entity Framework Core 6.0.4 initialized 'InventarioContext' using provider 'Pomelo.EntityFrameworkCore.MySql:6.0.1' with options: ServerVersion 8.0.28-mysql 
+[2023-10-29 18:48:12.960 -06:00 INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM `Producto` AS `p`
+WHERE `p`.`Estatus` <> 4
+[2023-10-29 18:48:12.966 -06:00 INF] Executed DbCommand (2ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT `p`.`ID`, `p`.`Categoria`, `p`.`Cve_prov`, `p`.`Desc_prod`, `p`.`Estatus`, `p`.`Nom_prod`, `p`.`Precio`, `p`.`Stock`
+FROM `Producto` AS `p`
+WHERE `p`.`Estatus` <> 4
+LIMIT @__p_1 OFFSET @__p_0
+[2023-10-29 18:48:12.968 -06:00 INF] Executing ObjectResult, writing value of type 'API.Helpers.Pager`1[[API.Dtos.ProductoDto, API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+[2023-10-29 18:48:12.968 -06:00 INF] Executed action API.Controllers.ProductoController.GetProducto (API) in 31.2251ms
+[2023-10-29 18:48:12.968 -06:00 INF] Executed endpoint 'API.Controllers.ProductoController.GetProducto (API)'
+[2023-10-29 18:48:12.969 -06:00 INF] Request finished HTTP/1.1 GET http://192.168.108.1:5000/api/producto?pageSize=3&pageIndex=1&search= application/json - - 200 - application/json;+charset=utf-8 38.3612ms
+[2023-10-29 18:49:24.674 -06:00 INF] Application is shutting down...
