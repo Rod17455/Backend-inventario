@@ -88,6 +88,29 @@ public class EscasezController : BaseApiController
         }
     }
 
+    [HttpPost("rechazar")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> PostProcesoRechazar(AltaEscasezDto proceso)
+    {
+        try
+        {
+            var result = await _productoPendiente.ProcesoRechazo(proceso);
+
+            if (result.Estatus == false)
+            {
+                return BadRequest(new ApiResponse(400, result.Mensaje ?? ""));
+            }
+
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("ERROR EN EL ENDPOINT DE ESCASEZ " + ex.Message);
+            return BadRequest(new ApiResponse(500));
+        }
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -110,6 +133,8 @@ public class EscasezController : BaseApiController
             return BadRequest(new ApiResponse(500));
         }
     }
+
+   
 
     //INFORMACIÓN DE UN PRODUCTO
     [HttpPost("detalle")]
@@ -152,7 +177,6 @@ public class EscasezController : BaseApiController
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<DetalleAutorizacion>> PostDetalleAutorizacion(DetalleAutorizacion detail)
     {
-
         try
         {
             var _detalle = await _unitOfWork.Autorizaciones.DetalleAutorizacion(detail.ID);

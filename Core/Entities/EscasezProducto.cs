@@ -14,6 +14,7 @@ public class EscasezProducto : BaseEntity
     public int UsuarioId { get; set; }
     public int? Estatus { get; set; }
     public decimal? Precio { get; set; }
+    public string? Observacion { get; set; }
     /*
      ProductoId int not null,
     Cant_Soli int not null,

@@ -31,6 +31,9 @@ public class EscasezProductoConfiguration : IEntityTypeConfiguration<EscasezProd
             .HasColumnType("int")
             .HasColumnName("Estatus");
         builder.Property(e => e.Precio).HasPrecision(10, 2);
+        builder.Property(e => e.Observacion)
+                .HasMaxLength(100)
+                .HasColumnName("Observacion");
 
 
 

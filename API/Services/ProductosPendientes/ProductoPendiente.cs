@@ -169,4 +169,52 @@ public class ProductoPendiente : IProductoPendiente
             }
         }
     }
+
+    public async Task<ManagementResponse> ProcesoRechazo(AltaEscasezDto altaEscasezDto)
+    {
+        using (var dbContextTransaction = _inventarioContext.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
+        {
+            ManagementResponse management = new ManagementResponse();
+            try
+            {
+                var idEscasez = altaEscasezDto.IdEscasez;
+                var observacion = altaEscasezDto.Observacion;
+
+                var updateEstatusEscasez = await _unitOfWork.Escasezes.ActualizarEstatusEscasez(idEscasez, 5);
+                if (updateEstatusEscasez != 1)
+                {
+                    await dbContextTransaction.RollbackAsync();
+                    management.Mensaje = "No se puede actualizar el estatus del escasez del producto";
+                    management.Estatus = false;
+                    return management;
+                }
+
+
+                var updtaeObservacion = await _unitOfWork.Escasezes.ActualizarObservacion(idEscasez, observacion);
+                if (updtaeObservacion != 1)
+                {
+                    await dbContextTransaction.RollbackAsync();
+                    management.Mensaje = "No se puede actualizar la observación del escasez del producto";
+                    management.Estatus = false;
+                    return management;
+                }
+
+
+                await dbContextTransaction.CommitAsync();
+
+                management.Mensaje = "Se actualizo la observación";
+                management.Estatus = true;
+                return management;
+
+            } catch (Exception ex) 
+            {
+                _logger.LogError("ERROR EN EL SERVICIO DE AUTORIZAR:  " + ex.Message);
+                await dbContextTransaction.RollbackAsync();
+                management.Mensaje = "Error en el servidor";
+                management.Estatus = false;
+
+                return management;
+            }
+        }
+    }
 }

@@ -4,8 +4,10 @@ using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -161,5 +163,14 @@ public class EscasesRepository : GenericRepository<InformacionEscasez>, IEscasez
 
 
         return await Task.FromResult(insertEscasez);
+    }
+
+    public async Task<int> ActualizarObservacion(int idEscasez, string observacion)
+    {
+        int update = _context.Database.ExecuteSqlRaw(@"UPDATE Escasez_Producto
+                                                                SET Observacion = {0}
+                                                                WHERE ID = {1}", observacion, idEscasez);
+
+        return await Task.FromResult(update);
     }
 }

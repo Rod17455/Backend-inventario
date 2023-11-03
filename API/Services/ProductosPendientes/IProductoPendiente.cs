@@ -7,4 +7,5 @@ public interface IProductoPendiente
 {
     Task<ManagementResponse> ProcesoPendienteAutorizar(PendienteAutorizarDto pendienteAutorizarDto);
     Task<ManagementResponse> ProcesoAutorizar(AltaEscasezDto altaEscasezDto);
+    Task<ManagementResponse> ProcesoRechazo(AltaEscasezDto altaEscasezDto);
 }
