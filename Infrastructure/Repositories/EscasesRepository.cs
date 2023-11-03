@@ -125,11 +125,12 @@ public class EscasesRepository : GenericRepository<InformacionEscasez>, IEscasez
         return await Task.FromResult(insertEscasez);
     }
 
-    public async Task<int> ActualizarEstatusProducto(int idProducto, int estatus)
+    public async Task<int> ActualizarEstatusProducto(int idProducto, int estatus, int stock)
     {
         int update = _context.Database.ExecuteSqlRaw(@"UPDATE Producto
-                                                                SET Estatus = {0}
-                                                                WHERE ID = {1}", estatus, idProducto);
+                                                                SET Estatus = {0},
+                                                                Stock = {1}
+                                                                WHERE ID = {2}", estatus, stock, idProducto);
 
         return await Task.FromResult(update);
     }

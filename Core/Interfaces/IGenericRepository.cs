@@ -13,6 +13,7 @@ public interface IGenericRepository<T> where T : BaseEntity
 {
     Task<InformacionProducto> DetalleProducto(int idProducto);
     Task<DetalleEscasez> DetalleEscasez(int idEscasez);
+    Task<DetalleAutorizacion> DetalleAutorizacion(int idAutorizacion);
     Task<T> GetByIdAsync(int id);
     Task<IEnumerable<T>> GetAllAsync();
     IEnumerable<T> Find(Expression<Func<T, bool>> expression);

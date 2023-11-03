@@ -7,6 +7,7 @@ public class AltaEscasezDto
     public int IdEscasez { get; set; }
     public int IdUsuario { get; set; }
     public int IdProducto { get; set; }
+    public int Stock { get; set; }
     public string? FechaAutorizacion { get; set; }
     public string? Observacion { get; set; }
 }

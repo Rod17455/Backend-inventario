@@ -18,10 +18,23 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     private IUsuarioRepository _usuarios;
     private IRolRepository _roles;
     private IEscasezRepository _escasezes;
+    private IAutorizacionRepository _autorizaciones;
 
     public UnitOfWork(InventarioContext context)
     {
         _context = context;
+    }
+
+    public IAutorizacionRepository Autorizaciones
+    {
+        get
+        {
+            if (_autorizaciones == null)
+            {
+                _autorizaciones = new AutorizacionRepository(_context);
+            }
+            return _autorizaciones;
+        }
     }
 
     public IEscasezRepository Escasezes

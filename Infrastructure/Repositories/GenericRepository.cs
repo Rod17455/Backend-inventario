@@ -33,6 +33,36 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         _context.Set<T>().AddRange(entities);
     }
 
+    public async Task<DetalleAutorizacion> DetalleAutorizacion(int idAutorizacion)
+    {
+        var consulta = (
+           from a in _context.Autorizaciones
+           join e in _context.Escasezes on a.Id_Escasez equals e.ID
+           join u in _context.Usuarios on a.Id_Usuario equals u.ID
+           join s in _context.Estatuses on a.Estatus equals s.ID
+           join p in _context.Productos on e.ProductoId equals p.ID
+           join prov in _context.CteProvs on p.CveProv equals prov.ID
+           select new DetalleAutorizacion
+           {
+               ID = a.ID,
+               Cantidad = e.Cant_Soli,
+               Fecha_Autorizacion = a.Fecha_Autoriza,
+               Nombre_Empleado = u.Apellido,
+               Nombre_Producto = p.NomProd,
+               Precio = e.Precio,
+               Categoria = p.Categoria,
+               Contacto = prov.Contacto,
+               DescProd = p.DescProd,
+               EmailUsuario = u.CorreoElectronico,
+               NombreEmpresa = prov.NombreEmpresa,
+               Stock = p.Stock,
+               Telefono = prov.Telefono
+
+           }).FirstOrDefaultAsync();
+
+        return await consulta;
+    }
+
     public async Task<DetalleEscasez> DetalleEscasez(int idEscasez)
     {
         var consulta = (

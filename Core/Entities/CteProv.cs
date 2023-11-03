@@ -9,7 +9,7 @@ namespace Core.Entities;
 public class CteProv : BaseEntity
 {
 
-    public string NombreEmpresa { get; set; } = null!;
+    public string? NombreEmpresa { get; set; }
 
     public string? Contacto { get; set; }
 

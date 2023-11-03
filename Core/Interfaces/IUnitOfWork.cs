@@ -14,6 +14,7 @@ public interface IUnitOfWork
     IProveedorRepository CteProvs { get; }
     IRolRepository Roles { get; }
     IEscasezRepository Escasezes { get; }
+    IAutorizacionRepository Autorizaciones { get; }
     Task<int> SaveAsync();
 
 }

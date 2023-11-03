@@ -33,8 +33,9 @@ public class ProductoPendiente : IProductoPendiente
                 var idUsuario = altaEscasezDto.IdUsuario;
                 var idProducto = altaEscasezDto.IdProducto;
                 var fecha = altaEscasezDto.FechaAutorizacion;
+                var stock = altaEscasezDto.Stock;
 
-                var updateEstatusProducto = await _unitOfWork.Escasezes.ActualizarEstatusProducto(idProducto, 6);
+                var updateEstatusProducto = await _unitOfWork.Escasezes.ActualizarEstatusProducto(idProducto, 6, stock);
                 if (updateEstatusProducto != 1)
                 {
                     await dbContextTransaction.RollbackAsync();
