@@ -32,6 +32,9 @@ namespace Infrastructure.Data.Configurations
                .HasColumnType("int")
                 .IsRequired()
                 .HasColumnName("Estatus");
+            builder.Property(e => e.Imagen)
+                .HasMaxLength(255)
+                .HasColumnName("Imagen");
             /* builder.Property(e => e.Imagen)
                  .HasMaxLength(255)
                  .HasColumnName("Imagen");*/

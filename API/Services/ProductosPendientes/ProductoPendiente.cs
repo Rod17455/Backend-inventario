@@ -1,9 +1,12 @@
 ﻿using API.Dtos;
 using API.Helpers.Errors;
+using API.Services.Notificaciones.Email;
 using Core.Entities;
+using Core.Entities.Personalizadas;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace API.Services.ProductosPendientes;
 
@@ -12,14 +15,36 @@ public class ProductoPendiente : IProductoPendiente
     private readonly ILogger<ProductoPendiente> _logger;
     private readonly IUnitOfWork _unitOfWork;
     private readonly InventarioContext _inventarioContext;
+    private readonly IEmailSender _email;
     //private readonly IEscasezRepository _escasezRepository;
 
-    public ProductoPendiente(ILogger<ProductoPendiente> logger, IUnitOfWork unitOfWork, InventarioContext inventarioContext)
+    public ProductoPendiente(ILogger<ProductoPendiente> logger, IUnitOfWork unitOfWork, InventarioContext inventarioContext, IEmailSender emailSender)
     {
         _logger = logger;
         _unitOfWork = unitOfWork;
         _inventarioContext = inventarioContext;
+        _email = emailSender;
         //_escasezRepository = escasezRepository;
+    }
+
+    public async Task<bool> EnviarCorreoProv(Plantilla plantilla)
+    {
+        try
+        {
+            var _plantilla = await RecuperarPlantilla(plantilla);
+
+            byte[] base64Pdf = Convert.FromBase64String(_plantilla);
+
+            //plantilla.EmailProv
+
+            await _email.SendEmailAsync("rtellez476@gmail.com", "Ejemplo" , _plantilla, base64Pdf);
+
+           return true;
+
+        } catch(Exception ex) {
+            _logger.LogError("Error en enviar correo al prov: {0}", ex.Message);
+            return false;
+        }
     }
 
     public async Task<ManagementResponse> ProcesoAutorizar(AltaEscasezDto altaEscasezDto)
@@ -72,6 +97,16 @@ public class ProductoPendiente : IProductoPendiente
                     return management;
                 }
 
+                var plantilla = await _unitOfWork.Escasezes.DatosPlantilla(idEscasez);
+
+                var result = await EnviarCorreoProv(plantilla);
+
+                if(result == false){
+                     await dbContextTransaction.RollbackAsync();
+                    management.Mensaje = "No se puede enviar el correo";
+                    management.Estatus = false;
+                    return management;
+                }
 
                 await dbContextTransaction.CommitAsync();
 
@@ -215,6 +250,38 @@ public class ProductoPendiente : IProductoPendiente
 
                 return management;
             }
+        }
+    }
+
+    public async Task<string> RecuperarPlantilla(Plantilla plantilla)
+    {
+        try
+        {
+            string _plantilla = string.Empty;
+             //System.IO.File.ReadAllText
+            using (StreamReader reader = new StreamReader("Recursos\\index.html"))
+            {
+                _plantilla = reader.ReadToEnd();
+            }
+
+            _plantilla = _plantilla.Replace("{NomProv}", plantilla.NomProv);
+            _plantilla = _plantilla.Replace("{Fecha}", plantilla.Fecha);
+            _plantilla = _plantilla.Replace("{IdAutorizacion}", plantilla.IdEscasez);
+            _plantilla = _plantilla.Replace("{Direccion}", plantilla.DireccionProv);
+            _plantilla = _plantilla.Replace("{NomProducto}", plantilla.NombreProducto);
+            _plantilla = _plantilla.Replace("{Cantidad}", plantilla.Cantidad);
+            _plantilla = _plantilla.Replace("{Precio}", plantilla.Precio);
+            _plantilla = _plantilla.Replace("{Empleado}", plantilla.NombreEmpleado);
+            _plantilla = _plantilla.Replace("{Imagen}", plantilla.Imagen);
+            _logger.LogInformation("IMAGEN: "+plantilla.Imagen);
+
+            return await Task.FromResult(_plantilla);
+
+
+        } catch(Exception ex)
+        {
+            _logger.LogError($"Error en recuperar plantilla de correo {0}",ex.Message);
+            return "0";
         }
     }
 }

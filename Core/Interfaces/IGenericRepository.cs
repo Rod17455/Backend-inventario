@@ -11,9 +11,11 @@ namespace Core.Interfaces;
 
 public interface IGenericRepository<T> where T : BaseEntity
 {
+    Task<CteProv> DetalleProv(int idProv);
     Task<InformacionProducto> DetalleProducto(int idProducto);
     Task<DetalleEscasez> DetalleEscasez(int idEscasez);
     Task<DetalleAutorizacion> DetalleAutorizacion(int idAutorizacion);
+    Task<Plantilla> DatosPlantilla(int idEscasez);
     Task<T> GetByIdAsync(int id);
     Task<IEnumerable<T>> GetAllAsync();
     IEnumerable<T> Find(Expression<Func<T, bool>> expression);

@@ -23,6 +23,8 @@ builder.Services.ConfigureCors();
 builder.Services.AddAplicationServices();
 builder.Services.ConfigureApiVersioning();
 builder.Services.AddJwt(builder.Configuration);
+//CONFIG EMAIL
+builder.Services.ConfiguracionEmail(builder.Configuration);
 
 
 builder.Services.AddControllers(options =>

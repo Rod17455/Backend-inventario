@@ -17,8 +17,6 @@ public class ProductoRepository : GenericRepository<Producto>, IProductoReposito
     {
     }
 
-
-
     public override async Task<Producto> GetByIdAsync(int id)
     {
         return await _context.Productos.FirstOrDefaultAsync(p => p.ID == id);

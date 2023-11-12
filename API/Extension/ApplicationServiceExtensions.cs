@@ -1,6 +1,7 @@
 ﻿using API.Helpers;
 using API.Helpers.Errors;
 using API.Services;
+using API.Services.Notificaciones.Email;
 using API.Services.ProductosPendientes;
 using AspNetCoreRateLimit;
 using Core.Entities;
@@ -39,7 +40,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IUserService, UserServices>();
         services.AddScoped<IProductoPendiente, ProductoPendiente>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-    }
+    }  
 
     public static void ConfigureRateLimition(this IServiceCollection services)
     {
@@ -58,12 +59,20 @@ public static class ApplicationServiceExtensions
                 new RateLimitRule
                 {
                     Endpoint = "*",
-                    Period = "10s",
-                    Limit = 2
+                    Period = "2s",
+                    Limit = 100
                 }
             };
         });
     }
+
+    
+    public static void ConfiguracionEmail(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddTransient<IEmailSender, EmailSender>();
+        services.Configure<EmailSenderOptions>(configuration.GetSection("EmailSenderOptions"));
+    }
+     
 
     public static void ConfigureApiVersioning(this IServiceCollection services)
     {

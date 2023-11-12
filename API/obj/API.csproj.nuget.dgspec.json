@@ -60,6 +60,10 @@
               "target": "Package",
               "version": "[4.1.0, )"
             },
+            "FirebaseDatabase.net": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.4, )"

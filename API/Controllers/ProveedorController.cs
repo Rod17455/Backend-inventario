@@ -27,7 +27,6 @@ public class ProveedorController : BaseApiController
         _mapper = mapper;
     }
 
-    //[HttpPost("register")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -64,12 +63,10 @@ public class ProveedorController : BaseApiController
     public async Task<ActionResult<CteProv>> Post(CteProvDto cteProvDto)
     {
         var cteProv = _mapper.Map<CteProv>(cteProvDto);
-        var cteprovBd = await _unitOfWork.CteProvs.GetByIdAsync(cteProvDto.ID);
-        if (cteprovBd != null)
-            return NotFound(new ApiResponse(404, "No puedes repetir el ID del proveedor"));
-
+        
         _unitOfWork.CteProvs.Add(cteProv);
         await _unitOfWork.SaveAsync();
+        Console.WriteLine("PROV: "+cteProv);
         if(cteProv == null)
         {
             return BadRequest(new ApiResponse(400));
@@ -77,29 +74,64 @@ public class ProveedorController : BaseApiController
 
         cteProvDto.ID = cteProv.ID;
         return CreatedAtAction(nameof(Post), new { id = cteProv.ID }, cteProv);
+        
+    }
+
+    [HttpPost("detalle")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult<CteProv>> PostOCDetalle(CteProv detail)
+    {
+
+        try
+        {
+            var _detalle = await _unitOfWork.CteProvs.DetalleProv(detail.ID);
+
+            if (_detalle == null)
+            {
+                return NotFound(new ApiResponse(404));
+            }
+
+            var response = new
+            {
+                Success = true,
+                Data = _mapper.Map<CteProv>(_detalle)
+            };
+
+            return Ok(response);
+        } catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return BadRequest(ex.Message);
+        }
     }
     
-    [HttpPut("edit/{id}")]
+    [HttpPut("edit")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<CteProvDto>> Put(int id, [FromBody]CteProvDto cteProvDto)
+    public async Task<ActionResult<CteProvDto>> Put([FromBody]CteProvDto cteProvDto)
     {
-        if (cteProvDto == null)
-            return NotFound(new ApiResponse(404, "El proveedor solicitado no existe"));
-
-        var cteprovBd = await _unitOfWork.CteProvs.GetByIdAsync(id);
-        if (cteprovBd == null)
-            return NotFound(new ApiResponse(404, "El proveedor solicitado no existe"));
 
         var cteProv = _mapper.Map<CteProv>(cteProvDto);
+
         _unitOfWork.CteProvs.Update(cteProv);
         await _unitOfWork.SaveAsync();
-        return cteProvDto;
+
+        var result = new
+            {
+                Success = true,
+                Message = "Proveedor Actualizado",
+                Data = cteProvDto
+            };
+
+        return Ok(result);
     }
 
     
-    [HttpPut("delete/{id}")]
+    [HttpDelete("delete/{id}")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Delete(int id)
@@ -111,7 +143,13 @@ public class ProveedorController : BaseApiController
         _unitOfWork.CteProvs.Remove(cteProv);
         await _unitOfWork.SaveAsync();
 
-        return NoContent();
+        var result = new
+            {
+                Success = true,
+                Message = "Proveedor Eliminado"
+            };
+
+        return Ok(result);
     }
 
 

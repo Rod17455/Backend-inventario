@@ -33,6 +33,31 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         _context.Set<T>().AddRange(entities);
     }
 
+    public async Task<Plantilla> DatosPlantilla(int idEscasez)
+    {
+        var dato = (
+           from es in _context.Escasezes
+           join p in _context.Productos on es.ProductoId equals p.ID
+           join prov in _context.CteProvs on p.CveProv equals prov.ID
+           join u in _context.Usuarios on es.UsuarioId equals u.ID
+           where es.ID == idEscasez
+           select new Plantilla
+           {
+               Cantidad = es.Cant_Soli.ToString(),
+               Precio = es.Precio.ToString(),
+               DireccionProv = prov.Direccion,
+               EmailProv = prov.CorreoElectronico,
+               Fecha = es.Fecha_Registro.ToString(),
+               IdEscasez = es.ID.ToString(),
+               NombreProducto = p.NomProd,
+               NomProv = prov.Contacto,
+               NombreEmpleado = u.Apellido,
+               Imagen = p.Imagen
+           }).FirstOrDefaultAsync(); 
+
+        return await dato;
+    }
+
     public async Task<DetalleAutorizacion> DetalleAutorizacion(int idAutorizacion)
     {
         var consulta = (
@@ -117,6 +142,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
            ).FirstOrDefaultAsync();
 
         return await detalle;
+    }
+
+    public async Task<CteProv> DetalleProv(int idProv)
+    {
+        return await _context.CteProvs.Where(x => x.ID == idProv).FirstOrDefaultAsync();
     }
 
     public virtual IEnumerable<T> Find(Expression<Func<T, bool>> expression)
