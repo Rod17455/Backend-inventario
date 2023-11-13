@@ -24,7 +24,7 @@ namespace Core.Entities.Personalizadas
 
         public string? Precio { get; set; }
 
-        public string? Imagen {get; set;}
+        //public string? Imagen {get; set;}
 
 
     }

@@ -29,6 +29,8 @@ public static class ApplicationServiceExtensions
             );
         });
 
+
+
     public static void AddAplicationServices(this IServiceCollection services)
     {
        /* services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

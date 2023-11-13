@@ -4,9 +4,15 @@ using API.Services.Notificaciones.Email;
 using Core.Entities;
 using Core.Entities.Personalizadas;
 using Core.Interfaces;
+using DinkToPdf;
 using Infrastructure.Data;
+using iTextSharp.text;
+using iTextSharp.text.html.simpleparser;
+using iTextSharp.text.pdf;
 using Microsoft.EntityFrameworkCore;
+using PuppeteerSharp;
 using System;
+using System.Text;
 
 namespace API.Services.ProductosPendientes;
 
@@ -32,20 +38,47 @@ public class ProductoPendiente : IProductoPendiente
         try
         {
             var _plantilla = await RecuperarPlantilla(plantilla);
+            //string html = "<html><body><h1>Hello, World!</h1></body></html>";
+            string html = PlantillaEjemplo(plantilla);
+            var titulo = "REPORTE " + plantilla.Fecha + " " + plantilla.NomProv;
+            // Cree una instancia de la clase Converter.
+            StringReader sr = new StringReader(html);
+            Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+            HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
+                pdfDoc.Open();
 
-            byte[] base64Pdf = Convert.FromBase64String(_plantilla);
+                try
+                {
+                    htmlparser.Parse(sr);
+                } catch(Exception ex)
+                {
+                    _logger.LogError("Error en parsear el HTML: {0}", ex.Message);
+                    return false;
+                }
 
-            //plantilla.EmailProv
+                
+                pdfDoc.Close();
+                byte[] bytes = memoryStream.ToArray();
+                memoryStream.Close();
+                await _email.SendEmailAsync("rodrigote.ti20@utsjr.edu.mx", titulo, _plantilla, bytes);
+            }
+            //var base64 = ConvertHtmlToPdf(_plantilla);
 
-            await _email.SendEmailAsync("rtellez476@gmail.com", "Ejemplo" , _plantilla, base64Pdf);
-
-           return true;
+            return true;
 
         } catch(Exception ex) {
             _logger.LogError("Error en enviar correo al prov: {0}", ex.Message);
             return false;
         }
     }
+
+    /*private byte[] ConvertHtmlToPdf(string htmlContent)
+    {
+        
+    }*/
 
     public async Task<ManagementResponse> ProcesoAutorizar(AltaEscasezDto altaEscasezDto)
     {
@@ -253,6 +286,31 @@ public class ProductoPendiente : IProductoPendiente
         }
     }
 
+    private string PlantillaEjemplo(Plantilla plantilla)
+    {
+        var _plantilla = File.ReadAllText("Recursos\\adjunto.html");
+
+        //System.IO.File.ReadAllText
+
+        /*using (StreamReader reader = new StreamReader())
+        {
+            _plantilla = reader.ReadToEnd();
+        }*/
+
+        _plantilla = _plantilla.Replace("{NomProv}", plantilla.NomProv);
+        _plantilla = _plantilla.Replace("{Fecha}", plantilla.Fecha);
+        _plantilla = _plantilla.Replace("{IdAutorizacion}", plantilla.IdEscasez);
+        _plantilla = _plantilla.Replace("{Direccion}", plantilla.DireccionProv);
+        _plantilla = _plantilla.Replace("{NomProducto}", plantilla.NombreProducto);
+        _plantilla = _plantilla.Replace("{Cantidad}", plantilla.Cantidad);
+        _plantilla = _plantilla.Replace("{Precio}", plantilla.Precio);
+        _plantilla = _plantilla.Replace("{Empleado}", plantilla.NombreEmpleado);
+
+        string html = _plantilla.ToString();
+
+        return html;
+    }
+
     public async Task<string> RecuperarPlantilla(Plantilla plantilla)
     {
         try
@@ -272,8 +330,8 @@ public class ProductoPendiente : IProductoPendiente
             _plantilla = _plantilla.Replace("{Cantidad}", plantilla.Cantidad);
             _plantilla = _plantilla.Replace("{Precio}", plantilla.Precio);
             _plantilla = _plantilla.Replace("{Empleado}", plantilla.NombreEmpleado);
-            _plantilla = _plantilla.Replace("{Imagen}", plantilla.Imagen);
-            _logger.LogInformation("IMAGEN: "+plantilla.Imagen);
+            //_plantilla = _plantilla.Replace("{Imagen}", plantilla.Imagen);
+            //_logger.LogInformation("IMAGEN: "+plantilla.Imagen);
 
             return await Task.FromResult(_plantilla);
 

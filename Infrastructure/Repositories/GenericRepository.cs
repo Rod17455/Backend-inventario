@@ -52,7 +52,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
                NombreProducto = p.NomProd,
                NomProv = prov.Contacto,
                NombreEmpleado = u.Apellido,
-               Imagen = p.Imagen
+               //Imagen = p.Imagen
            }).FirstOrDefaultAsync(); 
 
         return await dato;

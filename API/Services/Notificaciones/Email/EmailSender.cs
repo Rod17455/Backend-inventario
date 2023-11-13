@@ -1,4 +1,7 @@
 ﻿using API.Helpers;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
 using Microsoft.Extensions.Options;
 using System.Net;
 using System.Net.Mail;
@@ -31,16 +34,34 @@ public class EmailSender : IEmailSender
 
     public Task SendEmailAsync(string email, string subject, string message, byte[] adjunto)
     {
-        var correo = new MailMessage(from: Options.Email ?? "", to: email,
-                                        subject: subject, body: message);
-        correo.IsBodyHtml = true;
-
-        MemoryStream ms = new MemoryStream(adjunto);
-
-        correo.Attachments.Add(new Attachment(ms, "ejemplo.pdf", "application/pdf"));
+        //string htmlContent = PlantillaEjemplo();
+        string pdfFileName = "output.pdf";
 
         try
         {
+            // Convert HTML content to PDF
+           /* using (FileStream stream = new FileStream(pdfFileName, FileMode.Create))
+            {
+                using (Document document = new Document())
+                {
+                    PdfWriter writer = PdfWriter.GetInstance(document, stream);
+                    document.Open();
+                    using (StringReader reader = new StringReader(message))
+                    {
+                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, reader);
+                    }
+                    document.Close();
+                }
+            }*/
+
+            var correo = new MailMessage(from: Options.Email ?? "", to: email,
+                                        subject: subject, body: message);
+            correo.IsBodyHtml = true;
+
+            MemoryStream ms = new MemoryStream(adjunto);
+            Attachment attachment = new Attachment(ms, "Ejemplo.pdf", "application/pdf");
+            correo.Attachments.Add(attachment);
+
             return Cliente.SendMailAsync(correo);
         }
         catch (Exception ex)
@@ -48,5 +69,17 @@ public class EmailSender : IEmailSender
             Console.WriteLine("ERROR CORREO: " + ex);
             return Task.FromException(ex);
         }
+    }
+
+    private string PlantillaEjemplo()
+    {
+        string _plantilla = string.Empty;
+        //System.IO.File.ReadAllText
+        using (StreamReader reader = new StreamReader("Recursos\\adjunto.html"))
+        {
+            _plantilla = reader.ReadToEnd();
+        }
+
+        return _plantilla;
     }
 }

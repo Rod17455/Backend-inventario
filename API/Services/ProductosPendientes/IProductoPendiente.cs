@@ -11,4 +11,5 @@ public interface IProductoPendiente
     Task<ManagementResponse> ProcesoRechazo(AltaEscasezDto altaEscasezDto);
     Task<string> RecuperarPlantilla(Plantilla plantilla);
     Task<bool> EnviarCorreoProv(Plantilla plantilla);
+    //Task<byte[]> ConvertHtmlToPdf(string html);
 }
