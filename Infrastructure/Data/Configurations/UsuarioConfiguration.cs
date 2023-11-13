@@ -21,6 +21,7 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
         builder.Property(e => e.NomUser)
             .HasMaxLength(255)
             .HasColumnName("Nom_user");
+        builder.Property(e => e.Permiso).HasColumnType("int").IsRequired().HasColumnName("Permiso");
         builder.Property(e => e.Password).HasMaxLength(255);
         builder
           .HasMany(p => p.Roles)

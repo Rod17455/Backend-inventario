@@ -17,6 +17,8 @@ public class Usuario : BaseEntity
 
     public string? Password { get; set; }
 
+    public int? Permiso { get; set; }
+
     public ICollection<Rol> Roles { get; set; } = new HashSet<Rol>();
     public ICollection<RefreshToken> RefreshTokens { get; set; } = new HashSet<RefreshToken>();
     public ICollection<UsuarioRoles> UsuarioRoles { get; set; }

@@ -39,6 +39,7 @@ public class UserServices : IUserService
             NomUser = registerDto.NomUser,
             Apellido = registerDto.Apellido,
             CorreoElectronico = registerDto.CorreoElectronico,
+            Permiso = registerDto.Permiso
         };
 
         usuario.Password = _passwordHasher.HashPassword(usuario, registerDto.Password);

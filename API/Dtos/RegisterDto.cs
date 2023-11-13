@@ -12,4 +12,6 @@ public class RegisterDto
     public string? CorreoElectronico { get; set; }
     [Required]
     public string? Password { get; set; }
+    [Required]
+    public int? Permiso { get; set; }
 }
