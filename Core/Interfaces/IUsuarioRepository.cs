@@ -13,5 +13,6 @@ public interface IUsuarioRepository : IGenericRepository<Usuario>
     Task<Usuario> GetByUserNameAsync(string userName);
     Task<Usuario> GetByRefreshAsync(string refreshToken);
     Task<InformacionUsuario> DetalleUsuario(int idUsuario);
+    Task<string> ObtenerEmail(int id);
 
 }

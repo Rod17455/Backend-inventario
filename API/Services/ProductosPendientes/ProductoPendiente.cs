@@ -33,7 +33,7 @@ public class ProductoPendiente : IProductoPendiente
         //_escasezRepository = escasezRepository;
     }
 
-    public async Task<bool> EnviarCorreoProv(Plantilla plantilla)
+    public async Task<bool> EnviarCorreoProv(Plantilla plantilla, string email)
     {
         try
         {
@@ -63,7 +63,7 @@ public class ProductoPendiente : IProductoPendiente
                 pdfDoc.Close();
                 byte[] bytes = memoryStream.ToArray();
                 memoryStream.Close();
-                await _email.SendEmailAsync("rodrigote.ti20@utsjr.edu.mx", titulo, _plantilla, bytes);
+                await _email.SendEmailAsync(email, titulo, _plantilla, bytes);
             }
             //var base64 = ConvertHtmlToPdf(_plantilla);
 
@@ -130,9 +130,19 @@ public class ProductoPendiente : IProductoPendiente
                     return management;
                 }
 
+                var email = await _unitOfWork.CteProvs.ObtenerEmail(idProducto);
+
+                if (email == "")
+                {
+                    await dbContextTransaction.RollbackAsync();
+                    management.Mensaje = "No se puede obtener el email";
+                    management.Estatus = false;
+                    return management;
+                }
+
                 var plantilla = await _unitOfWork.Escasezes.DatosPlantilla(idEscasez);
 
-                var result = await EnviarCorreoProv(plantilla);
+                var result = await EnviarCorreoProv(plantilla, email);
 
                 if(result == false){
                      await dbContextTransaction.RollbackAsync();
@@ -288,27 +298,31 @@ public class ProductoPendiente : IProductoPendiente
 
     private string PlantillaEjemplo(Plantilla plantilla)
     {
-        var _plantilla = File.ReadAllText("Recursos\\adjunto.html");
 
-        //System.IO.File.ReadAllText
-
-        /*using (StreamReader reader = new StreamReader())
+        try
         {
-            _plantilla = reader.ReadToEnd();
-        }*/
+            string rutaPlantilla = "http://inventario659.byethost6.com/plantillas/index.html";
 
-        _plantilla = _plantilla.Replace("{NomProv}", plantilla.NomProv);
-        _plantilla = _plantilla.Replace("{Fecha}", plantilla.Fecha);
-        _plantilla = _plantilla.Replace("{IdAutorizacion}", plantilla.IdEscasez);
-        _plantilla = _plantilla.Replace("{Direccion}", plantilla.DireccionProv);
-        _plantilla = _plantilla.Replace("{NomProducto}", plantilla.NombreProducto);
-        _plantilla = _plantilla.Replace("{Cantidad}", plantilla.Cantidad);
-        _plantilla = _plantilla.Replace("{Precio}", plantilla.Precio);
-        _plantilla = _plantilla.Replace("{Empleado}", plantilla.NombreEmpleado);
+            var _plantilla = File.ReadAllText("Recursos\\adjunto.html");
 
-        string html = _plantilla.ToString();
 
-        return html;
+            _plantilla = _plantilla.Replace("{NomProv}", plantilla.NomProv);
+            _plantilla = _plantilla.Replace("{Fecha}", plantilla.Fecha);
+            _plantilla = _plantilla.Replace("{IdAutorizacion}", plantilla.IdEscasez);
+            _plantilla = _plantilla.Replace("{Direccion}", plantilla.DireccionProv);
+            _plantilla = _plantilla.Replace("{NomProducto}", plantilla.NombreProducto);
+            _plantilla = _plantilla.Replace("{Cantidad}", plantilla.Cantidad);
+            _plantilla = _plantilla.Replace("{Precio}", plantilla.Precio);
+            _plantilla = _plantilla.Replace("{Empleado}", plantilla.NombreEmpleado);
+
+            string html = _plantilla.ToString();
+
+            return html;
+        } catch(Exception ex)
+        {
+            _logger.LogError($"Error en recuperar la plantilla para correos: ${ex.Message}");
+            return "0";
+        }
     }
 
     public async Task<string> RecuperarPlantilla(Plantilla plantilla)

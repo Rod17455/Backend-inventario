@@ -130,13 +130,14 @@ public class UserServices : IUserService
         datosUsuarioDto.EstaAutenticado = true;
         JwtSecurityToken jwtSecurityToken = CreateJwtToken(usuario);
         datosUsuarioDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-        datosUsuarioDto.Email = usuario.CorreoElectronico;
-        datosUsuarioDto.UserName = usuario.NomUser;
+        datosUsuarioDto.CorreoElectronico = usuario.CorreoElectronico;
+        datosUsuarioDto.NomUser = usuario.NomUser;
         datosUsuarioDto.Roles = usuario.Roles
                                         .Select(u => u.Nombre)
                                         .ToList();
         datosUsuarioDto.RefreshToken = newRefreshToken.Token;
         datosUsuarioDto.RefreshTokenExpiration = newRefreshToken.Expires;
+        datosUsuarioDto.Permiso = usuario.Permiso;
         return datosUsuarioDto;
     }
 
@@ -161,8 +162,9 @@ public class UserServices : IUserService
             datosUsuarioDto.EstaAutenticado = true;
             JwtSecurityToken jwtSecurityToken = CreateJwtToken(usuario);
             datosUsuarioDto.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-            datosUsuarioDto.Email = usuario.CorreoElectronico;
-            datosUsuarioDto.UserName = usuario.NomUser;
+            datosUsuarioDto.CorreoElectronico = usuario.CorreoElectronico;
+            datosUsuarioDto.NomUser = usuario.NomUser;
+            datosUsuarioDto.Permiso = usuario.Permiso;
             datosUsuarioDto.Roles = usuario.Roles
                                             .Select(u => u.Nombre)
                                             .ToList();

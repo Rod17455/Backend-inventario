@@ -38,7 +38,7 @@ builder.Services.AddValidationErrors();
 builder.Services.AddDbContext<InventarioContext>(options => {
     try
     {
-        var serverVersion = new MySqlServerVersion(new Version(8, 0, 28));
+        var serverVersion = new MySqlServerVersion(new Version(8, 0));
         options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), serverVersion);
     }
     catch (Exception ex)
@@ -68,7 +68,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-using (var scope = app.Services.CreateScope())
+app.UseSwagger();
+app.UseSwaggerUI();
+
+/*using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var loggerFactory = services.GetRequiredService<ILoggerFactory>();
@@ -83,11 +86,11 @@ using (var scope = app.Services.CreateScope())
         var _logger = loggerFactory.CreateLogger<Program>();
         _logger.LogError(ex, "Ocurrio un error durante la migración");
     }
-}
+}*/
 
 app.UseCors("CorsPolicy");
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

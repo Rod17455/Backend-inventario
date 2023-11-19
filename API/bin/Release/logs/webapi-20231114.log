@@ -1,0 +1,25 @@
+[2023-11-14 00:31:10.888 -06:00 INF] User profile is available. Using 'C:\Users\Rodrigo Tellez\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[2023-11-14 00:31:11.226 -06:00 INF] Now listening on: http://localhost:5000
+[2023-11-14 00:31:11.227 -06:00 INF] Now listening on: https://localhost:5001
+[2023-11-14 00:31:11.234 -06:00 INF] Application started. Press Ctrl+C to shut down.
+[2023-11-14 00:31:11.234 -06:00 INF] Hosting environment: Production
+[2023-11-14 00:31:11.234 -06:00 INF] Content root path: D:\10CUATRIMESTRE\HECTOR\Backend\inventario\API\bin\Release\net6.0\
+[2023-11-14 00:31:14.497 -06:00 INF] Request starting HTTP/1.1 POST http://localhost:5000/api/usuario/token application/json 58
+[2023-11-14 00:31:14.841 -06:00 INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '14/11/2023 06:13:53 a. m.', Current time: '14/11/2023 06:31:14 a. m.'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+[2023-11-14 00:31:14.871 -06:00 INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '14/11/2023 06:13:53 a. m.', Current time: '14/11/2023 06:31:14 a. m.'.
+[2023-11-14 00:31:14.877 -06:00 INF] Executing endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-11-14 00:31:14.930 -06:00 INF] Route matched with {action = "GetToken", controller = "Usuario"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTokenAsync(API.Dtos.LoginDto) on controller API.Controllers.UsuarioController (API).
+[2023-11-14 00:31:15.514 -06:00 ERR] Error en el endpoint de login: No database provider has been configured for this DbContext. A provider can be configured by overriding the 'DbContext.OnConfiguring' method or by using 'AddDbContext' on the application service provider. If 'AddDbContext' is used, then also ensure that your DbContext type accepts a DbContextOptions<TContext> object in its constructor and passes it to the base constructor for DbContext.
+[2023-11-14 00:31:15.519 -06:00 INF] Executing BadRequestObjectResult, writing value of type 'API.Helpers.Errors.ApiResponse'.
+[2023-11-14 00:31:15.549 -06:00 INF] Executed action API.Controllers.UsuarioController.GetTokenAsync (API) in 610.8301ms
+[2023-11-14 00:31:15.550 -06:00 INF] Executed endpoint 'API.Controllers.UsuarioController.GetTokenAsync (API)'
+[2023-11-14 00:31:15.554 -06:00 INF] Request finished HTTP/1.1 POST http://localhost:5000/api/usuario/token application/json 58 - 400 - application/json;+charset=utf-8 1063.2608ms

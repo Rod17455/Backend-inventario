@@ -10,6 +10,6 @@ public interface IProductoPendiente
     Task<ManagementResponse> ProcesoAutorizar(AltaEscasezDto altaEscasezDto);
     Task<ManagementResponse> ProcesoRechazo(AltaEscasezDto altaEscasezDto);
     Task<string> RecuperarPlantilla(Plantilla plantilla);
-    Task<bool> EnviarCorreoProv(Plantilla plantilla);
+    Task<bool> EnviarCorreoProv(Plantilla plantilla, string email);
     //Task<byte[]> ConvertHtmlToPdf(string html);
 }

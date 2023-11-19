@@ -1,0 +1,3 @@
+D:\10CUATRIMESTRE\HECTOR\Backend\inventario\Core\bin\Release\net6.0\publish\Core.dll
+D:\10CUATRIMESTRE\HECTOR\Backend\inventario\Core\bin\Release\net6.0\publish\Core.deps.json
+D:\10CUATRIMESTRE\HECTOR\Backend\inventario\Core\bin\Release\net6.0\publish\Core.pdb

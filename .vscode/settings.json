@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/59cf8980-b1c7-4dc7-bbc3-89354946086c/resourceGroups/Hosting/providers/Microsoft.Web/sites/inventariopro7895",
+    "appService.deploySubpath": "."
+}

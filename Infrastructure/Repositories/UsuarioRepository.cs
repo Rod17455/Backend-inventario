@@ -76,4 +76,15 @@ public class UsuarioRepository : GenericRepository<Usuario>, IUsuarioRepository
                              .Include(u => u.RefreshTokens)
                              .FirstOrDefaultAsync(u => u.NomUser.ToLower() == userName.ToLower());
     }
+
+    public async Task<string> ObtenerEmail(int id)
+    {
+        string email = _context.Usuarios
+                        .Where(x => x.ID == 1)
+                        .Select(x => x.CorreoElectronico)
+                        .FirstOrDefault() ?? "";
+
+
+        return await Task.FromResult(email);
+    }
 }

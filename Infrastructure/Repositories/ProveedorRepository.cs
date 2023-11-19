@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Entities.Personalizadas;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -53,4 +54,15 @@ public class ProveedorRepository : GenericRepository<CteProv>, IProveedorReposit
         return (totalRegistros, registros); 
     }
 
+    public async Task<string> ObtenerEmail(int id)
+    {
+        var dato = (
+           from pro in _context.Productos
+           join cte in _context.CteProvs on pro.CveProv equals cte.ID
+           where pro.ID == id
+           select cte.CorreoElectronico).FirstOrDefaultAsync();
+
+
+        return await dato ?? "";
+    }
 }

@@ -10,4 +10,6 @@ namespace Core.Interfaces;
 public interface IProveedorRepository : IGenericRepository<CteProv>
 {
     Task<int> GetTotalProveedores();
+    Task<string> ObtenerEmail(int id);
+
 }

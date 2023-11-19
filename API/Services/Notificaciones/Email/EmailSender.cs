@@ -61,7 +61,7 @@ public class EmailSender : IEmailSender
             MemoryStream ms = new MemoryStream(adjunto);
             Attachment attachment = new Attachment(ms, "Ejemplo.pdf", "application/pdf");
             correo.Attachments.Add(attachment);
-
+            _logger.LogInformation("Correo enviado");
             return Cliente.SendMailAsync(correo);
         }
         catch (Exception ex)

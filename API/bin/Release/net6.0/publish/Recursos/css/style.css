@@ -1,0 +1,149 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+header {
+    background: #ffffff;
+    color: #333;
+    padding-top: 10px;
+    min-height: 70px;
+    border-bottom: #e8491d 4px solid;
+}
+
+    header a {
+        color: #333;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 16px;
+    }
+
+    header ul {
+        padding: 0;
+        margin: 0;
+        float: right;
+        margin-top: 30px;
+        margin-right: 20px;
+    }
+
+    header li {
+        display: inline;
+        list-style: none;
+        margin-left: 20px;
+        font-size: 16px;
+    }
+
+    header #branding {
+        float: left;
+    }
+
+        header #branding h1 {
+            margin: 0;
+        }
+
+            header #branding h1 span {
+                color: #e8491d;
+            }
+
+    header a, header a:hover {
+        color: #ffffff;
+    }
+
+    header #sign {
+        float: right;
+        margin-top: 15px;
+        margin-right: 20px;
+    }
+
+    header .highlight, header .current a {
+        color: #e8491d;
+        font-weight: bold;
+    }
+
+    header a, header a:hover {
+        color: #333;
+        text-decoration: none;
+    }
+
+    header form {
+        float: left;
+        margin-top: 15px;
+    }
+
+    header input.search-bar {
+        width: 300px;
+        height: 20px;
+        border: solid 1px #0074cc;
+        padding: 10px;
+        font-size: 14px;
+        margin-left: 10px;
+        background-color: #fff;
+    }
+
+    header #live-search li {
+        display: inline;
+        list-style: none;
+    }
+
+    header a.search {
+        color: #e8491d;
+        text-decoration: none;
+    }
+
+        header a.search:hover {
+            color: #333;
+        }
+
+    header a.view-cart {
+        text-decoration: none;
+        color: #e8491d;
+        float: right;
+        margin-top: 20px;
+        margin-right: 10px;
+        font-size: 16px;
+        position: relative;
+    }
+
+        header a.view-cart span {
+            background: #333;
+            color: #fff;
+            padding: 5px;
+            border-radius: 50%;
+            position: absolute;
+            top: -10px;
+            left: -10px;
+        }
+
+        header a.view-cart:hover {
+            color: #333;
+        }
+
+.main {
+    padding: 20px 0;
+}
+
+.order-details {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+    .order-details h2 {
+        color: #e8491d;
+        margin-bottom: 20px;
+    }
+
+    .order-details p {
+        font-size: 16px;
+        color: #333;
+        margin: 10px 0;
+    }
