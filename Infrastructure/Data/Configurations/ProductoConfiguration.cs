@@ -35,9 +35,12 @@ namespace Infrastructure.Data.Configurations
             builder.Property(e => e.Imagen)
                 .HasMaxLength(255)
                 .HasColumnName("Imagen");
-            /* builder.Property(e => e.Imagen)
-                 .HasMaxLength(255)
-                 .HasColumnName("Imagen");*/
+            builder.Property(e => e.Observacion)
+                 .HasColumnName("obs");
+            builder.Property(e => e.Color)
+                .HasMaxLength(50)
+                .HasColumnName("Color");
+
         }
     }
 }

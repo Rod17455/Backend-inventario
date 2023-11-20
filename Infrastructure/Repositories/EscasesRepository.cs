@@ -81,11 +81,12 @@ public class EscasesRepository : GenericRepository<InformacionEscasez>, IEscasez
     }
 
 
-    public async Task<int> ActualizarEstatusProductoPendiente(int idProducto)
+    public async Task<int> ActualizarEstatusProductoPendiente(int idProducto, string color)
     {
         int update = _context.Database.ExecuteSqlRaw(@"UPDATE Producto
-                                                                SET Estatus = {0}
-                                                                WHERE ID = {1}", 4, idProducto);
+                                                                SET Estatus = {0},
+                                                                    Color = {1}
+                                                                WHERE ID = {2}", 4, color,idProducto);
 
         return await Task.FromResult(update);
     }
@@ -127,12 +128,13 @@ public class EscasesRepository : GenericRepository<InformacionEscasez>, IEscasez
         return await Task.FromResult(insertEscasez);
     }
 
-    public async Task<int> ActualizarEstatusProducto(int idProducto, int estatus, int stock)
+    public async Task<int> ActualizarEstatusProducto(int idProducto, int estatus, int stock, string color)
     {
         int update = _context.Database.ExecuteSqlRaw(@"UPDATE Producto
                                                                 SET Estatus = {0},
-                                                                Stock = {1}
-                                                                WHERE ID = {2}", estatus, stock, idProducto);
+                                                                Stock = {1},
+                                                                Color = {2}
+                                                                WHERE ID = {3}", estatus, stock, color,idProducto);
 
         return await Task.FromResult(update);
     }
@@ -170,6 +172,17 @@ public class EscasesRepository : GenericRepository<InformacionEscasez>, IEscasez
         int update = _context.Database.ExecuteSqlRaw(@"UPDATE Escasez_Producto
                                                                 SET Observacion = {0}
                                                                 WHERE ID = {1}", observacion, idEscasez);
+
+        return await Task.FromResult(update);
+    }
+
+    public async Task<int> ActualizarEstatusProductoRechazado(int idProducto, string color, string obs)
+    {
+        int update = _context.Database.ExecuteSqlRaw(@"UPDATE Producto
+                                                                SET Estatus = {0},
+                                                                    Color = {1},
+                                                                    obs = {2}
+                                                                WHERE ID = {3}", 5, color, obs,idProducto);
 
         return await Task.FromResult(update);
     }

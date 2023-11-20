@@ -20,5 +20,8 @@ public interface IProductoRepository : IGenericRepository<Producto>
     Task<IEnumerable<Producto>> GetAllXEntregarAsync();
     Task<(int totalRegistros, IEnumerable<Producto> registros)> GetAllXEntregarAsync(int pageIndex, int pageSize, string search);
 
+    Task<IEnumerable<Producto>> GetAllSinStock();
+    Task<(int totalRegistros, IEnumerable<Producto> registros)> GetAllSinStock(int pageIndex, int pageSize, string search);
+
     Task<int> GetTotalProductos();
 }

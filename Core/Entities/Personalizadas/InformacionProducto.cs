@@ -30,4 +30,9 @@ public class InformacionProducto : BaseEntity
 
     public string? EmailProv { get; set; }
 
+    public string? Observacion { get; set;}
+
+    public string? Color { get; set; }
+
+
 }

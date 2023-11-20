@@ -93,7 +93,7 @@ public class ProductoPendiente : IProductoPendiente
                 var fecha = altaEscasezDto.FechaAutorizacion;
                 var stock = altaEscasezDto.Stock;
 
-                var updateEstatusProducto = await _unitOfWork.Escasezes.ActualizarEstatusProducto(idProducto, 6, stock);
+                var updateEstatusProducto = await _unitOfWork.Escasezes.ActualizarEstatusProducto(idProducto, 6, stock, "Color.fromARGB(255, 238, 23, 224)");
                 if (updateEstatusProducto != 1)
                 {
                     await dbContextTransaction.RollbackAsync();
@@ -196,7 +196,7 @@ public class ProductoPendiente : IProductoPendiente
                 }
 
                 //Modificar el estatus de producto
-                var updateEstatusProducto = await _unitOfWork.Escasezes.ActualizarEstatusProductoPendiente(idProducto);
+                var updateEstatusProducto = await _unitOfWork.Escasezes.ActualizarEstatusProductoPendiente(idProducto, "Color.fromARGB(255, 61, 121, 242)");
                 if (updateEstatusProducto != 1)
                 {
                     await dbContextTransaction.RollbackAsync();
@@ -257,6 +257,8 @@ public class ProductoPendiente : IProductoPendiente
             {
                 var idEscasez = altaEscasezDto.IdEscasez;
                 var observacion = altaEscasezDto.Observacion;
+
+                var updateRechazo = await _unitOfWork.Escasezes.ActualizarEstatusProductoRechazado(altaEscasezDto.IdProducto, "Color.fromARGB(255, 128, 0, 0)", observacion);
 
                 var updateEstatusEscasez = await _unitOfWork.Escasezes.ActualizarEstatusEscasez(idEscasez, 5);
                 if (updateEstatusEscasez != 1)

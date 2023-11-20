@@ -62,6 +62,24 @@ public class ProductoController : BaseApiController
             productoParams.PageIndex, productoParams.PageSize, productoParams.Search);
     }
 
+    [HttpGet("sinStock")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<Pager<ProductoDto>>> GetProductoSinStock([FromQuery] Params productoParams)
+    {
+
+        var resultado = await _unitOfWork.Productos.
+            GetAllSinStock(productoParams.PageIndex,
+                        productoParams.PageSize, productoParams.Search ?? "");
+
+        var listaProducto = _mapper.Map<List<ProductoDto>>(resultado.registros);
+
+        Response.Headers.Add("X-InlineCount", resultado.totalRegistros.ToString());
+
+        return new Pager<ProductoDto>(listaProducto, resultado.totalRegistros,
+            productoParams.PageIndex, productoParams.PageSize, productoParams.Search);
+    }
+
     [HttpGet("rechazadas")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

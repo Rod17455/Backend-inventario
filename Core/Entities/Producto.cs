@@ -16,5 +16,7 @@ public class Producto : BaseEntity
     public int? CveProv { get; set; }
     public int? Estatus { get; set; }
     public string? Imagen { get; set; }
+    public string? Observacion { get; set; }
+    public string? Color { get; set; }
     
 }

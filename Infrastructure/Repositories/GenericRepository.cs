@@ -137,6 +137,9 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
                    NombProv = c.Contacto,
                    EmailProv = c.CorreoElectronico,
                    TelefonoProv = c.Telefono,
+                   Observacion = p.Observacion,
+                   Color = p.Color,
+                   Imagen = p.Imagen,
                    ID = p.ID
                }
            ).FirstOrDefaultAsync();
